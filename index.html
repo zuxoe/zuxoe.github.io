@@ -2,60 +2,58 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>냉키트</title>
-    <style>
-        body { font-family: sans-serif; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
-        .container { width: 100%; max-width: 400px; border: 1px solid #ccc; padding: 20px; border-radius: 10px; }
-        .hidden { display: none; }
-        .card { border: 2px solid black; padding: 10px; margin-bottom: 10px; border-radius: 5px; background: #f9f9f9; }
-        button { width: 100%; padding: 10px; margin-top: 10px; cursor: pointer; background: #ffe4e1; border: 1px solid #333; font-weight: bold; }
-        h1 { text-align: center; color: orange; }
-    </style>
+    <title>냉키트 - 메인</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="container">
+        <header>
+            <h1 class="logo">냉키트 😋</h1>
+        </header>
 
-<div class="container" id="step1">
-    <h1>냉키트 😋</h1>
-    <p><strong>1. 종류를 골라주세요</strong></p>
-    <label><input type="radio" name="foodType" value="한식" checked> 한식</label>
-    <label><input type="radio" name="foodType" value="일식"> 일식</label>
-    <label><input type="radio" name="foodType" value="중식"> 중식</label>
-    
-    <p><strong>2. 재료 입력</strong></p>
-    <input type="text" id="ing" placeholder="예: 김치, 고기" style="width:90%; padding:10px;">
-    
-    <button onclick="goNext()">다음 페이지로 →</button>
-</div>
+        <section class="question-section">
+            <h3>1. 어떤 요리를 만들고 싶으신가요?</h3>
+            <div class="options">
+                <p>〈 종류 〉 
+                    <label><input type="radio" name="type" value="한식"> 한식</label>
+                    <label><input type="radio" name="type" value="일식"> 일식</label>
+                    <label><input type="radio" name="type" value="중식"> 중식</label>
+                    <label><input type="radio" name="type" value="양식"> 양식</label>
+                </p>
+                </div>
 
-<div class="container hidden" id="step2">
-    <h1>추천 결과</h1>
-    <div id="resultArea"></div>
-    <button onclick="location.reload()">처음으로 돌아가기</button>
-</div>
+            <h3>2. 사용할 재료를 입력해주세요.</h3>
+            <input type="text" id="ingredients" placeholder="예: 김치, 돼지고기, 두부">
 
-<script>
-    const data = {
-        "한식": ["김치찌개 ⭐", "김치찜 ⭐⭐", "김치만두 ⭐⭐⭐"],
-        "일식": ["연어초밥 ⭐⭐⭐", "돈카츠 ⭐⭐"],
-        "중식": ["짜장면 ⭐⭐⭐", "짬뽕 ⭐⭐"]
-    };
+            <h3>3. 세부적인 음식 취향을 입력해 주세요.</h3>
+            <div class="detail-prefs">
+                <input type="text" id="dislike-texture" placeholder="싫어하는 식감">
+                <input type="text" id="dislike-item" placeholder="싫어하는 식재료">
+                <input type="text" id="spicy-level" placeholder="선호하는 맵기 정도">
+            </div>
+        </section>
 
-    function goNext() {
-        // 선택한 라디오 버튼 값 가져오기
-        const type = document.querySelector('input[name="foodType"]:checked').value;
-        const resultArea = document.getElementById('resultArea');
-        
-        // 결과 화면 만들기
-        resultArea.innerHTML = `<h3>${type} 결과입니다</h3>`;
-        data[type].forEach(food => {
-            resultArea.innerHTML += `<div class="card">${food}<br><small>재료: ${document.getElementById('ing').value}</small></div>`;
-        });
+        <footer class="nav-buttons">
+            <button onclick="saveAndNext()">다음 ➔</button>
+        </footer>
+    </div>
 
-        // 화면 전환
-        document.getElementById('step1').classList.add('hidden');
-        document.getElementById('step2').classList.remove('hidden');
-    }
-</script>
-
+    <script>
+        function saveAndNext() {
+            // 선택된 값들 수집
+            const selectedType = document.querySelector('input[name="type"]:checked')?.value || "전체";
+            const ingredients = document.getElementById('ingredients').value;
+            
+            // 데이터 저장 (로컬 스토리지)
+            const userData = {
+                type: selectedType,
+                ingredients: ingredients
+            };
+            localStorage.setItem('userChoice', JSON.stringify(userData));
+            
+            // 다음 페이지로 이동
+            window.location.href = 'result.html';
+        }
+    </script>
 </body>
 </html>
