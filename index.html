@@ -4,234 +4,159 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>냉키트 - 나만의 레시피</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg-color: #ffffff;
-            --border-color: #eeeeee;
-            --accent-color: #4CAF50;
-        }
-
-        body {
-            font-family: 'Noto Sans KR', sans-serif;
-            background-color: #f5f5f5;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-        }
-
-        /* 모바일 레이아웃 고정 */
-        .wrapper {
-            width: 100%;
-            max-width: 480px;
-            background-color: var(--bg-color);
-            min-height: 100vh;
-            border-left: 1px solid var(--border-color);
-            border-right: 1px solid var(--border-color);
-            display: flex;
-            flex-direction: column;
-            position: relative;
-        }
-
-        /* 헤더 스타일 */
-        header {
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .icon-btn { font-size: 24px; cursor: pointer; text-decoration: none; color: #000; }
+        :root { --main: #FFC107; --blue: #2196F3; --green: #4CAF50; }
+        body { font-family: sans-serif; background: #f0f0f0; margin: 0; display: flex; justify-content: center; }
+        .wrapper { width: 100%; max-width: 480px; background: #fff; min-height: 100vh; display: flex; flex-direction: column; position: relative; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
         
-        .logo {
-            text-align: center;
-            font-size: 32px;
-            font-weight: 900;
-            letter-spacing: -2px;
-        }
-        .logo span:nth-child(1) { color: #FFC107; } /* 냉 */
-        .logo span:nth-child(2) { color: #2196F3; } /* 키 */
-        .logo span:nth-child(3) { color: #4CAF50; } /* 트 */
+        /* 헤더 */
+        header { padding: 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; }
+        .logo { font-size: 28px; font-weight: 900; letter-spacing: -1px; cursor: pointer; }
+        .logo span:nth-child(1) { color: var(--main); }
+        .logo span:nth-child(2) { color: var(--blue); }
+        .logo span:nth-child(3) { color: var(--green); }
 
-        /* 섹션 스타일 */
-        section {
-            padding: 20px;
-            border-bottom: 1px dotted #ccc;
-        }
+        /* 공통 섹션 */
+        section { padding: 20px; border-bottom: 1px dotted #ccc; display: block; }
+        h2 { font-size: 16px; margin-bottom: 15px; }
+        .row { margin-bottom: 12px; font-size: 14px; }
+        .options { display: inline-flex; flex-wrap: wrap; gap: 8px; margin-left: 5px; }
+        input[type="text"] { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 4px; box-sizing: border-box; }
 
-        h2 {
-            font-size: 16px;
-            margin-bottom: 15px;
-            font-weight: bold;
-        }
-
-        /* 질문 1 스타일 */
-        .row {
-            display: flex;
-            margin-bottom: 12px;
-            align-items: center;
-        }
-        .row-title {
-            width: 60px;
-            font-weight: bold;
-            font-size: 14px;
-        }
-        .options {
-            flex: 1;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .options label {
-            font-size: 13px;
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-        }
-        .options input { margin-right: 4px; }
-
-        /* 입력창 스타일 */
-        .input-box {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
-            font-size: 14px;
-            outline: none;
-        }
-        .input-box:focus { border-color: #bbb; }
-
-        .sub-text {
-            font-size: 11px;
-            color: #999;
-            margin-top: 5px;
-        }
-
-        /* 질문 3 상세 스타일 */
-        .detail-item { margin-bottom: 15px; }
-        .detail-item label {
-            display: block;
-            font-size: 14px;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
+        /* 결과 페이지용 카드 스타일 */
+        .recipe-card { display: flex; border: 2px solid #333; border-radius: 4px; padding: 10px; margin-bottom: 15px; background: #fafafa; position: relative; }
+        .food-img { width: 100px; height: 100px; border: 1px solid #333; background: #fff; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 12px; }
+        .info { margin-left: 15px; flex: 1; }
+        .btn-group { display: flex; justify-content: flex-end; gap: 5px; margin-top: 10px; }
+        .mini-btn { padding: 4px 8px; font-size: 11px; border: 1px solid #333; background: #ffe4e1; cursor: pointer; }
 
         /* 하단 네비게이션 */
-        footer {
-            margin-top: auto;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .nav-link {
-            text-decoration: none;
-            color: #333;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
+        footer { margin-top: auto; padding: 20px; display: flex; justify-content: space-between; }
+        .nav-btn { padding: 10px 25px; border: 1px solid #ccc; background: #fff; border-radius: 20px; cursor: pointer; font-weight: bold; }
+        .next-btn { background: #ffe4e1; border: none; }
+
+        /* 화면 전환용 클래스 */
+        .hidden { display: none !important; }
     </style>
 </head>
 <body>
 
 <div class="wrapper">
     <header>
-        <div class="icon-btn">☰</div>
-        <div class="logo">
+        <div onclick="location.reload()" style="cursor:pointer">☰</div>
+        <div class="logo" onclick="location.reload()">
             <span>냉</span><span>키</span><span>트</span>
         </div>
-        <div class="icon-btn">🏠</div>
+        <div onclick="location.reload()" style="cursor:pointer">🏠</div>
     </header>
 
-    <section>
-        <h2>1. 어떤 요리를 만들고 싶으신가요?</h2>
-        
-        <div class="row">
-            <span class="row-title">&lt;종류&gt;</span>
-            <div class="options">
-                <label><input type="radio" name="type"> 한식</label>
-                <label><input type="radio" name="type"> 일식</label>
-                <label><input type="radio" name="type"> 중식</label>
-                <label><input type="radio" name="type"> 양식</label>
-                <label><input type="radio" name="type"> 디저트</label>
+    <div id="page1">
+        <section>
+            <h2>1. 어떤 요리를 만들고 싶으신가요?</h2>
+            <div class="row">
+                <strong>&lt;종류&gt;</strong>
+                <div class="options">
+                    <label><input type="radio" name="foodType" value="한식" checked> 한식</label>
+                    <label><input type="radio" name="foodType" value="일식"> 일식</label>
+                    <label><input type="radio" name="foodType" value="중식"> 중식</label>
+                    <label><input type="radio" name="foodType" value="양식"> 양식</label>
+                </div>
             </div>
-        </div>
-
-        <div class="row">
-            <span class="row-title">&lt;상황&gt;</span>
-            <div class="options">
-                <label><input type="radio" name="sit"> 다이어트</label>
-                <label><input type="radio" name="sit"> 이유식</label>
-                <label><input type="radio" name="sit"> 안주</label>
-                <label><input type="radio" name="sit"> 초스피드</label>
-                <label><input type="radio" name="sit"> 손님접대</label>
+            <div class="row">
+                <strong>&lt;상황&gt;</strong>
+                <div class="options">
+                    <label><input type="radio" name="sit" checked> 다이어트</label>
+                    <label><input type="radio" name="sit"> 안주</label>
+                    <label><input type="radio" name="sit"> 초스피드</label>
+                </div>
             </div>
-        </div>
+        </section>
 
-        <div class="row">
-            <span class="row-title">&lt;건강&gt;</span>
-            <div class="options">
-                <label><input type="radio" name="health"> 위건강</label>
-                <label><input type="radio" name="health"> 장건강</label>
-                <label><input type="radio" name="health"> 혈당조절</label>
-                <label><input type="radio" name="health"> 간건강</label>
-                <label><input type="radio" name="health"> 혈액순환</label>
+        <section>
+            <h2>2. 사용할 재료를 입력해주세요.</h2>
+            <input type="text" id="ingInput" placeholder="예: 양파, 계란, 스팸">
+            <p style="font-size:11px; color:#999; margin-top:5px;">* 2개 이상의 재료는 쉼표(,)로 구분해 주세요.</p>
+        </section>
+
+        <section style="border-bottom:none;">
+            <h2>3. 세부적인 음식 취향</h2>
+            <div class="row">
+                <label>- 싫어하는 식감</label>
+                <input type="text">
             </div>
-        </div>
+        </section>
 
-        <div class="row">
-            <span class="row-title">&lt;방법&gt;</span>
-            <div class="options">
-                <label><input type="radio" name="method"> 볶음</label>
-                <label><input type="radio" name="method"> 끓이기</label>
-                <label><input type="radio" name="method"> 비빔</label>
-                <label><input type="radio" name="method"> 굽기</label>
-                <label><input type="radio" name="method"> 삶기</label>
+        <footer>
+            <button class="nav-btn">이전</button>
+            <button class="nav-btn next-btn" onclick="showResults()">다음 →</button>
+        </footer>
+    </div>
+
+    <div id="page2" class="hidden">
+        <div id="recipeList" style="padding: 20px;">
             </div>
-        </div>
-    </section>
-
-    <section>
-        <h2>2. 사용할 재료를 입력해주세요.</h2>
-        <input type="text" class="input-box" placeholder="">
-        <div class="sub-text">* 2개 이상의 재료는 쉼표(,)로 구분해 주세요.</div>
-    </section>
-
-    <section style="border-bottom: none;">
-        <h2>3. 세부적인 음식 취향을 입력해 주세요.</h2>
-        
-        <div class="detail-item">
-            <label>- 싫어하는 식감</label>
-            <input type="text" class="input-box">
-        </div>
-
-        <div class="detail-item">
-            <label>- 싫어하는 식재료</label>
-            <input type="text" class="input-box">
-        </div>
-
-        <div class="detail-item">
-            <label>- 선호하는 맵기 정도</label>
-            <input type="text" class="input-box">
-        </div>
-    </section>
-
-    <footer>
-        <a href="#" class="nav-link">← 이전</a>
-        <a href="#" class="nav-link">다음 →</a>
-    </footer>
+        <footer>
+            <button class="nav-btn" onclick="location.reload()">← 다시 선택</button>
+        </footer>
+    </div>
 </div>
 
-</body>
-</html
+<script>
+    // 음식 데이터
+    const recipeData = {
+        "한식": [
+            { name: "김치찌개", star: "⭐", ing: "김치, 돼지고기", method: "냄비에 끓이기" },
+            { name: "김치만두", star: "⭐⭐⭐", ing: "김치, 밀가루 피", method: "찜기에 찌기" },
+            { name: "김치찜", star: "⭐⭐", ing: "묵은지, 삼겹살", method: "푹 삶기" }
+        ],
+        "일식": [
+            { name: "연어초밥", star: "⭐⭐⭐", ing: "연어, 밥", method: "밥 위에 올리기" },
+            { name: "라멘", star: "⭐⭐", ing: "차슈, 생면", method: "육수에 끓이기" }
+        ],
+        "중식": [
+            { name: "짜장면", star: "⭐⭐⭐", ing: "춘장, 양파, 면", method: "소스 볶기" },
+            { name: "탕수육", star: "⭐⭐", ing: "돼지고기, 녹말", method: "기름에 튀기기" }
+        ],
+        "양식": [
+            { name: "알리오올리오", star: "⭐⭐", ing: "마늘, 올리브유, 면", method: "팬에 볶기" },
+            { name: "스테이크", star: "⭐⭐⭐", ing: "소고기, 버터", method: "그릴에 굽기" }
+        ]
+    };
 
-    // 예시: 다음 버튼 클릭 시 실행될 함수
-function goToResult() {
-    const selectedType = document.querySelector('input[name="type"]:checked')?.value;
-    localStorage.setItem('userChoice', selectedType); // 선택한 종류 저장
-    location.href = 'recipe.html'; // 결과 페이지로 이동
-}
+    function showResults() {
+        // 1. 선택한 종류 가져오기
+        const selectedType = document.querySelector('input[name="foodType"]:checked').value;
+        const listDiv = document.getElementById('recipeList');
+        
+        // 2. 결과 목록 비우고 새로 채우기
+        listDiv.innerHTML = `<h2 style="margin-top:0;">${selectedType} 추천 결과</h2>`;
+        
+        const results = recipeData[selectedType] || [];
+        
+        results.forEach(item => {
+            listDiv.innerHTML += `
+                <div class="recipe-card">
+                    <span style="position:absolute; top:5px; right:10px; color:orange;">🔖</span>
+                    <div class="food-img">음식 사진</div>
+                    <div class="info">
+                        <h3 style="margin:0; font-size:18px;">${item.name} <span style="font-size:12px; color:#fbc02d;">${item.star}</span></h3>
+                        <p style="font-size:12px; margin:5px 0;">재료 : ${item.ing}</p>
+                        <p style="font-size:12px; margin:5px 0;">조리법 : ${item.method}</p>
+                        <div class="btn-group">
+                            <button class="mini-btn">조리 시작</button>
+                            <button class="mini-btn">조리 종료</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+
+        // 3. 화면 전환
+        document.getElementById('page1').classList.add('hidden');
+        document.getElementById('page2').classList.remove('hidden');
+        window.scrollTo(0, 0); // 화면 상단으로 올리기
+    }
+</script>
+
+</body>
+</html>
