@@ -227,4 +227,11 @@
 </div>
 
 </body>
-</html>
+</html
+
+    // 예시: 다음 버튼 클릭 시 실행될 함수
+function goToResult() {
+    const selectedType = document.querySelector('input[name="type"]:checked')?.value;
+    localStorage.setItem('userChoice', selectedType); // 선택한 종류 저장
+    location.href = 'result.html'; // 결과 페이지로 이동
+}
