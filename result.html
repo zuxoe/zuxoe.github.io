@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>냉키트 - 추천 결과</title>
+    <style>
+        /* 이미지 디자인을 바탕으로 한 스타일 */
+        body { font-family: 'Nanum Gothic', sans-serif; background-color: #ffffff; display: flex; justify-content: center; padding: 20px; }
+        .container { width: 100%; max-width: 500px; border: 1px solid #ddd; padding: 20px; position: relative; }
+        
+        header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 15px; border-bottom: 2px dashed #ccc; margin-bottom: 20px; }
+        .logo { font-size: 28px; font-weight: bold; color: #333; }
+        
+        /* 요리 카드 레이아웃 */
+        .recipe-list { display: flex; flex-direction: column; gap: 15px; }
+        .recipe-card { display: flex; border: 2px solid #4a5568; border-radius: 10px; padding: 15px; position: relative; background: #fff; }
+        
+        .recipe-img-box { width: 120px; height: 120px; border: 1px solid #000; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-weight: bold; }
+        
+        .recipe-info { flex: 1; }
+        .recipe-info h3 { margin: 0 0 10px 0; font-size: 20px; display: flex; align-items: center; gap: 5px; }
+        .star { color: #f1c40f; font-size: 18px; }
+        .recipe-info p { margin: 3px 0; font-size: 14px; color: #333; }
+        
+        .bookmark { position: absolute; top: 10px; right: 10px; font-size: 20px; color: #ff7675; }
+        
+        /* 하단 버튼 */
+        .card-btns { margin-top: 15px; display: flex; gap: 10px; }
+        .card-btns button { padding: 5px 12px; border: 1px solid #000; background: #ffeaa7; cursor: pointer; font-size: 13px; font-weight: bold; }
+        
+        footer { text-align: center; margin-top: 30px; font-size: 24px; color: #ccc; }
+        .prev-btn { margin-top: 20px; padding: 10px 20px; cursor: pointer; border-radius: 5px; border: 1px solid #ccc; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div style="font-size: 24px;">☰</div>
+            <div class="logo">냉키트 😋</div>
+            <div style="font-size: 24px;">🏠</div>
+        </header>
+
+        <div id="recipe-container" class="recipe-list">
+            </div>
+
+        <footer>
+            ● ● ●
+            <br>
+            <button class="prev-btn" onclick="history.back()">이전으로 돌아가기</button>
+        </footer>
+    </div>
+
+    <script>
+        // [데이터베이스] 추천될 수 있는 모든 요리 목록 (여기에 요리를 계속 추가하세요)
+        const recipeDatabase = [
+            { name: "김치찌개", star: "⭐", ingredients: "김치, 돼지고기, 두부", method: "보글보글 끓이기", type: "한식" },
+            { name: "김치만두", star: "⭐⭐⭐", ingredients: "김치, 다진고기, 만두피", method: "찜기에 찌기", type: "한식" },
+            { name: "김치찜", star: "⭐⭐", ingredients: "김치, 삼겹살, 대파", method: "약불로 푹 익히기", type: "한식" },
+            { name: "된장찌개", star: "⭐⭐", ingredients: "된장, 호박, 두부", method: "뚝배기에 끓이기", type: "한식" },
+            { name: "볶음밥", star: "⭐", ingredients: "밥, 계란, 햄", method: "팬에 달달 볶기", type: "한식" },
+            { name: "알리오올리오", star: "⭐⭐", ingredients: "마늘, 파스타면, 올리브유", method: "면수와 함께 볶기", type: "양식" }
+        ];
+
+        window.onload = function() {
+            // 1. 첫 페이지에서 저장한 데이터 가져오기
+            const storedData = localStorage.getItem('userChoice');
+            if (!storedData) {
+                document.getElementById('recipe-container').innerHTML = "<p>입력된 정보가 없습니다.</p>";
+                return;
+            }
+
+            const userData = JSON.parse(storedData);
+            const userIngredients = userData.ingredients; // 예: "김치, 두부"
+            const container = document.getElementById('recipe-container');
+
+            // 2. 추천 로직: 사용자가 입력한 재료가 포함된 요리 필터링
+            // 입력받은 재료를 쉼표 기준으로 나눠서 배열로 만듦
+            const inputItems = userIngredients.split(',').map(item => item.trim());
+            
+            const filteredRecipes = recipeDatabase.filter(recipe => {
+                // 사용자가 입력한 재료 중 하나라도 요리 데이터의 'ingredients'에 포함되어 있으면 통과
+                return inputItems.some(input => recipe.ingredients.includes(input));
+            });
+
+            // 3. 화면 구현
+            if (filteredRecipes.length === 0) {
+                container.innerHTML = "<p style='text-align:center;'>일치하는 요리가 없어요. <br>다른 재료를 입력해보세요!</p>";
+            } else {
+                filteredRecipes.forEach(recipe => {
+                    const cardHtml = `
+                        <div class="recipe-card">
+                            <div class="bookmark">🔖</div>
+                            <div class="recipe-img-box">음식사진</div>
+                            <div class="recipe-info">
+                                <h3>${recipe.name} <span class="star">${recipe.star}</span></h3>
+                                <p>재료 : ${recipe.ingredients}</p>
+                                <p>조리법 : ${recipe.method}</p>
+                                <div class="card-btns">
+                                    <button onclick="alert('${recipe.name} 조리를 시작합니다!')">조리 시작</button>
+                                    <button onclick="alert('조리가 완료되었습니다.')">조리 종료</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    container.innerHTML += cardHtml;
+                });
+            }
+        };
+    </script>
+</body>
+</html>
