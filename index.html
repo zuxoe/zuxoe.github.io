@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>냉키트 - 나만의 레시피</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --border-color: #eeeeee;
+            --accent-color: #4CAF50;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* 모바일 레이아웃 고정 */
+        .wrapper {
+            width: 100%;
+            max-width: 480px;
+            background-color: var(--bg-color);
+            min-height: 100vh;
+            border-left: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* 헤더 스타일 */
+        header {
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .icon-btn { font-size: 24px; cursor: pointer; text-decoration: none; color: #000; }
+        
+        .logo {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: -2px;
+        }
+        .logo span:nth-child(1) { color: #FFC107; } /* 냉 */
+        .logo span:nth-child(2) { color: #2196F3; } /* 키 */
+        .logo span:nth-child(3) { color: #4CAF50; } /* 트 */
+
+        /* 섹션 스타일 */
+        section {
+            padding: 20px;
+            border-bottom: 1px dotted #ccc;
+        }
+
+        h2 {
+            font-size: 16px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        /* 질문 1 스타일 */
+        .row {
+            display: flex;
+            margin-bottom: 12px;
+            align-items: center;
+        }
+        .row-title {
+            width: 60px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .options {
+            flex: 1;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .options label {
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .options input { margin-right: 4px; }
+
+        /* 입력창 스타일 */
+        .input-box {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+            outline: none;
+        }
+        .input-box:focus { border-color: #bbb; }
+
+        .sub-text {
+            font-size: 11px;
+            color: #999;
+            margin-top: 5px;
+        }
+
+        /* 질문 3 상세 스타일 */
+        .detail-item { margin-bottom: 15px; }
+        .detail-item label {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        /* 하단 네비게이션 */
+        footer {
+            margin-top: auto;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-link {
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <header>
+        <div class="icon-btn">☰</div>
+        <div class="logo">
+            <span>냉</span><span>키</span><span>트</span>
+        </div>
+        <div class="icon-btn">🏠</div>
+    </header>
+
+    <section>
+        <h2>1. 어떤 요리를 만들고 싶으신가요?</h2>
+        
+        <div class="row">
+            <span class="row-title">&lt;종류&gt;</span>
+            <div class="options">
+                <label><input type="radio" name="type"> 한식</label>
+                <label><input type="radio" name="type"> 일식</label>
+                <label><input type="radio" name="type"> 중식</label>
+                <label><input type="radio" name="type"> 양식</label>
+                <label><input type="radio" name="type"> 디저트</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <span class="row-title">&lt;상황&gt;</span>
+            <div class="options">
+                <label><input type="radio" name="sit"> 다이어트</label>
+                <label><input type="radio" name="sit"> 이유식</label>
+                <label><input type="radio" name="sit"> 안주</label>
+                <label><input type="radio" name="sit"> 초스피드</label>
+                <label><input type="radio" name="sit"> 손님접대</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <span class="row-title">&lt;건강&gt;</span>
+            <div class="options">
+                <label><input type="radio" name="health"> 위건강</label>
+                <label><input type="radio" name="health"> 장건강</label>
+                <label><input type="radio" name="health"> 혈당조절</label>
+                <label><input type="radio" name="health"> 간건강</label>
+                <label><input type="radio" name="health"> 혈액순환</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <span class="row-title">&lt;방법&gt;</span>
+            <div class="options">
+                <label><input type="radio" name="method"> 볶음</label>
+                <label><input type="radio" name="method"> 끓이기</label>
+                <label><input type="radio" name="method"> 비빔</label>
+                <label><input type="radio" name="method"> 굽기</label>
+                <label><input type="radio" name="method"> 삶기</label>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>2. 사용할 재료를 입력해주세요.</h2>
+        <input type="text" class="input-box" placeholder="">
+        <div class="sub-text">* 2개 이상의 재료는 쉼표(,)로 구분해 주세요.</div>
+    </section>
+
+    <section style="border-bottom: none;">
+        <h2>3. 세부적인 음식 취향을 입력해 주세요.</h2>
+        
+        <div class="detail-item">
+            <label>- 싫어하는 식감</label>
+            <input type="text" class="input-box">
+        </div>
+
+        <div class="detail-item">
+            <label>- 싫어하는 식재료</label>
+            <input type="text" class="input-box">
+        </div>
+
+        <div class="detail-item">
+            <label>- 선호하는 맵기 정도</label>
+            <input type="text" class="input-box">
+        </div>
+    </section>
+
+    <footer>
+        <a href="#" class="nav-link">← 이전</a>
+        <a href="#" class="nav-link">다음 →</a>
+    </footer>
+</div>
+
+</body>
+</html>
