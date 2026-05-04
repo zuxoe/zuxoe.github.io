@@ -1,15 +1,29 @@
-function login() {
-  const userId = document.getElementById("userId").value;
-  const userPw = document.getElementById("userPw").value;
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>냉키트 로그인</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="login-body">
+  <div class="login-container">
+    <h1 class="login-title">LOGIN</h1>
 
-  if (userId.trim() === "" || userPw.trim() === "") {
-    alert("아이디와 비밀번호를 입력해주세요.");
-    return;
-  }
+    <input id="userId" class="login-input" type="text" placeholder="아이디" />
+    <input id="userPw" class="login-input" type="password" placeholder="비밀번호" />
 
-  location.href = "survey.html";
-}
+    <button class="login-next-btn" onclick="login()">→</button>
 
-function skipLogin() {
-  location.href = "survey.html";
-}
+    <p class="login-help">아이디 / 비밀번호를 잊으셨나요?</p>
+
+    <div class="login-links">
+      <a href="#">회원가입</a>
+      <span>OR</span>
+      <a href="#" onclick="skipLogin()">건너뛰기</a>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
