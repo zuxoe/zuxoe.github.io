@@ -1,89 +1,15 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>냉키트 로그인</title>
+function login() {
+  const userId = document.getElementById("userId").value;
+  const userPw = document.getElementById("userPw").value;
 
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <main class="login-page">
-    <section class="login-box">
-      <h1 class="login-title">LOGIN</h1>
+  if (userId.trim() === "" || userPw.trim() === "") {
+    alert("아이디와 비밀번호를 입력해주세요.");
+    return;
+  }
 
-      <input
-        id="userId"
-        class="login-input"
-        type="text"
-        placeholder="아이디"
-      />
+  location.href = "survey.html";
+}
 
-      <input
-        id="userPw"
-        class="login-input"
-        type="password"
-        placeholder="비밀번호"
-      />
-
-      <button class="login-button" onclick="login()">
-        →
-      </button>
-
-      <p class="find-text">아이디 / 비밀번호를 잊으셨나요?</p>
-
-      <div class="bottom-links">
-        <a href="#">회원가입</a>
-        <span>OR</span>
-        <a href="#" onclick="skipLogin()">건너뛰기</a>
-      </div>
-    </section>
-  </main>
-
-  <script src="script.js"></script>
-</body>
-</html><!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>냉키트 로그인</title>
-
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <main class="login-page">
-    <section class="login-box">
-      <h1 class="login-title">LOGIN</h1>
-
-      <input
-        id="userId"
-        class="login-input"
-        type="text"
-        placeholder="아이디"
-      />
-
-      <input
-        id="userPw"
-        class="login-input"
-        type="password"
-        placeholder="비밀번호"
-      />
-
-      <button class="login-button" onclick="login()">
-        →
-      </button>
-
-      <p class="find-text">아이디 / 비밀번호를 잊으셨나요?</p>
-
-      <div class="bottom-links">
-        <a href="#">회원가입</a>
-        <span>OR</span>
-        <a href="#" onclick="skipLogin()">건너뛰기</a>
-      </div>
-    </section>
-  </main>
-
-  <script src="script.js"></script>
-</body>
-</html>
+function skipLogin() {
+  location.href = "survey.html";
+}
