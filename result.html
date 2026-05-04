@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>냉키트 음식 추천</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: white;
+      font-family: Arial, sans-serif;
+      color: #111;
+    }
+
+    header {
+      height: 120px;
+      border-bottom: 3px dotted #ddd;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 25px;
+    }
+
+    .menu,
+    .home {
+      font-size: 45px;
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
+
+    .logo {
+      font-size: 58px;
+      font-weight: bold;
+    }
+
+    .logo span:nth-child(1) {
+      color: #ffd233;
+    }
+
+    .logo span:nth-child(2) {
+      color: #66b8ff;
+    }
+
+    .logo span:nth-child(3) {
+      color: #18a542;
+    }
+
+    .content {
+      padding: 35px 45px 100px;
+    }
+
+    h2 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .condition {
+      color: #777;
+      font-size: 20px;
+      margin-bottom: 30px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .card {
+      border: 4px solid #333;
+      border-radius: 18px;
+      padding: 22px;
+      min-height: 260px;
+      background: #fff;
+    }
+
+    .food-img {
+      height: 110px;
+      border-radius: 15px;
+      background: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 55px;
+      margin-bottom: 18px;
+    }
+
+    .card h3 {
+      font-size: 27px;
+      margin: 0 0 12px;
+    }
+
+    .card p {
+      font-size: 18px;
+      line-height: 1.5;
+      margin: 6px 0;
+    }
+
+    .tag {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      background: #e8e8e8;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    footer {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      background: white;
+      display: flex;
+      justify-content: space-between;
+      padding: 15px 25px;
+    }
+
+    footer button {
+      border: none;
+      border-radius: 12px;
+      background: #e8e8e8;
+      padding: 10px 25px;
+      font-size: 25px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    @media (max-width: 900px) {
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .logo {
+        font-size: 42px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <button class="menu">☰</button>
+    <div class="logo">
+      <span>냉</span><span>키</span><span>트</span> ＞＜
+    </div>
+    <button class="home" onclick="location.href='index.html'">⌂</button>
+  </header>
+
+  <main class="content">
+    <h2>오늘의 추천 음식</h2>
+    <div id="condition" class="condition"></div>
+
+    <div id="cards" class="cards"></div>
+  </main>
+
+  <footer>
+    <button onclick="location.href='survey.html'">← 이전</button>
+    <button onclick="location.href='index.html'">처음으로</button>
+  </footer>
+
+  <script>
+    const foods = [
+      {
+        name: "김치볶음밥",
+        type: "한식",
+        situation: "초스피드",
+        method: "볶음",
+        health: "",
+        emoji: "🍚",
+        desc: "김치와 밥만 있어도 빠르게 만들 수 있는 대표적인 한식 메뉴입니다."
+      },
+      {
+        name: "된장찌개",
+        type: "한식",
+        situation: "손님접대",
+        method: "끓이기",
+        health: "장건강",
+        emoji: "🥘",
+        desc: "구수한 된장과 채소를 넣어 끓이는 든든한 집밥 메뉴입니다."
+      },
+      {
+        name: "비빔밥",
+        type: "한식",
+        situation: "다이어트",
+        method: "비빔",
+        health: "혈액순환",
+        emoji: "🥗",
+        desc: "여러 채소와 밥을 함께 비벼 먹어 균형 잡힌 한 끼로 좋습니다."
+      },
+      {
+        name: "계란말이",
+        type: "한식",
+        situation: "초스피드",
+        method: "굽기",
+        health: "위건강",
+        emoji: "🍳",
+        desc: "계란만 있으면 쉽게 만들 수 있는 부드러운 반찬입니다."
+      },
+      {
+        name: "오야코동",
+        type: "일식",
+        situation: "초스피드",
+        method: "끓이기",
+        health: "",
+        emoji: "🍛",
+        desc: "닭고기와 계란을 간장 소스에 졸여 밥 위에 올리는 일본식 덮밥입니다."
+      },
+      {
+        name: "연어덮밥",
+        type: "일식",
+        situation: "다이어트",
+        method: "비빔",
+        health: "혈액순환",
+        emoji: "🍣",
+        desc: "연어와 밥, 채소를 함께 먹는 깔끔한 덮밥 메뉴입니다."
+      },
+      {
+        name: "야키소바",
+        type: "일식",
+        situation: "야식",
+        method: "볶음",
+        health: "",
+        emoji: "🍜",
+        desc: "면과 채소를 소스에 볶아 만드는 짭짤한 일본식 볶음면입니다."
+      },
+      {
+        name: "마파두부",
+        type: "중식",
+        situation: "야식",
+        method: "볶음",
+        health: "혈액순환",
+        emoji: "🌶️",
+        desc: "두부와 매콤한 소스를 함께 볶아 밥과 잘 어울리는 중식 메뉴입니다."
+      },
+      {
+        name: "토마토 계란볶음",
+        type: "중식",
+        situation: "초스피드",
+        method: "볶음",
+        health: "위건강",
+        emoji: "🍅",
+        desc: "토마토와 계란으로 빠르게 만들 수 있는 부드러운 중국식 가정식입니다."
+      },
+      {
+        name: "볶음우동",
+        type: "중식",
+        situation: "야식",
+        method: "볶음",
+        health: "",
+        emoji: "🥢",
+        desc: "우동면과 채소, 고기를 넣고 볶아 든든하게 먹기 좋은 메뉴입니다."
+      },
+      {
+        name: "토마토 파스타",
+        type: "양식",
+        situation: "손님접대",
+        method: "끓이기",
+        health: "혈당조절",
+        emoji: "🍝",
+        desc: "토마토 소스를 활용한 깔끔하고 대중적인 양식 메뉴입니다."
+      },
+      {
+        name: "치킨 샐러드",
+        type: "양식",
+        situation: "다이어트",
+        method: "굽기",
+        health: "혈당조절",
+        emoji: "🥗",
+        desc: "구운 닭가슴살과 채소를 함께 먹는 가벼운 한 끼입니다."
+      },
+      {
+        name: "감자수프",
+        type: "양식",
+        situation: "손님접대",
+        method: "끓이기",
+        health: "위건강",
+        emoji: "🥣",
+        desc: "부드럽고 따뜻해서 속이 편한 양식 수프입니다."
+      },
+      {
+        name: "프렌치토스트",
+        type: "디저트",
+        situation: "초스피드",
+        method: "굽기",
+        health: "",
+        emoji: "🍞",
+        desc: "식빵과 계란으로 간단하게 만들 수 있는 달콤한 디저트입니다."
+      },
+      {
+        name: "요거트볼",
+        type: "디저트",
+        situation: "다이어트",
+        method: "비빔",
+        health: "장건강",
+        emoji: "🍓",
+        desc: "요거트와 과일, 견과류를 섞어 먹는 상큼한 디저트입니다."
+      },
+      {
+        name: "바나나 팬케이크",
+        type: "디저트",
+        situation: "손님접대",
+        method: "굽기",
+        health: "",
+        emoji: "🥞",
+        desc: "바나나와 반죽을 구워 만드는 부드럽고 달콤한 디저트입니다."
+      }
+    ];
+
+    const type = localStorage.getItem("type") || "";
+    const situation = localStorage.getItem("situation") || "";
+    const health = localStorage.getItem("health") || "";
+    const method = localStorage.getItem("method") || "";
+    const ingredients = localStorage.getItem("ingredients") || "";
+    const spicy = localStorage.getItem("spicy") || "";
+
+    document.getElementById("condition").innerText =
+      "선택한 조건: " +
+      (type || "종류 없음") + " / " +
+      (situation || "상황 없음") + " / " +
+      (health || "건강 조건 없음") + " / " +
+      (method || "조리법 없음") +
+      (ingredients ? " / 재료: " + ingredients : "") +
+      (spicy ? " / 맵기: " + spicy : "");
+
+    let scoredFoods = foods.map(food => {
+      let score = 0;
+
+      if (food.type === type) score += 4;
+      if (food.situation === situation) score += 3;
+      if (food.health === health) score += 2;
+      if (food.method === method) score += 2;
+
+      const ingredientList = ingredients.split(",");
+      ingredientList.forEach(item => {
+        const clean = item.trim();
+        if (clean !== "" && food.name.includes(clean)) {
+          score += 3;
+        }
+      });
+
+      return {
+        ...food,
+        score: score
+      };
+    });
+
+    scoredFoods.sort((a, b) => b.score - a.score);
+
+    let resultFoods = scoredFoods.filter(food => food.score > 0).slice(0, 6);
+
+    if (resultFoods.length < 3) {
+      resultFoods = scoredFoods.slice(0, 6);
+    }
+
+    const cards = document.getElementById("cards");
+
+    resultFoods.forEach(food => {
+      const card = document.createElement("div");
+      card.className = "card";
+
+      card.innerHTML = `
+        <div class="food-img">${food.emoji}</div>
+        <h3>${food.name}</h3>
+        <p>${food.desc}</p>
+        <p><strong>종류:</strong> ${food.type}</p>
+        <p><strong>추천 상황:</strong> ${food.situation}</p>
+        <span class="tag">${food.method}</span>
+      `;
+
+      cards.appendChild(card);
+    });
+  </script>
+</body>
+</html>
