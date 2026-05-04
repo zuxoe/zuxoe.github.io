@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>냉키트 조건 선택</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="survey-page">
+    <header class="app-header">
+      <button class="icon-button">☰</button>
+
+      <div class="logo">
+        <span class="logo-yellow">냉</span>
+        <span class="logo-blue">키</span>
+        <span class="logo-green">트</span>
+        <span class="logo-face">＞＜</span>
+      </div>
+
+      <button class="icon-button" onclick="location.href='index.html'">⌂</button>
+    </header>
+
+    <section class="survey-section">
+      <h2>1. 어떤 요리를 만들고 싶으신가요?</h2>
+
+      <div class="option-row">
+        <strong>&lt; 종류 &gt;</strong>
+        <label><input type="radio" name="type" value="한식"> 한식</label>
+        <label><input type="radio" name="type" value="일식"> 일식</label>
+        <label><input type="radio" name="type" value="중식"> 중식</label>
+        <label><input type="radio" name="type" value="양식"> 양식</label>
+        <label><input type="radio" name="type" value="디저트"> 디저트</label>
+      </div>
+
+      <div class="option-row">
+        <strong>&lt; 상황 &gt;</strong>
+        <label><input type="radio" name="situation" value="다이어트"> 다이어트</label>
+        <label><input type="radio" name="situation" value="야식"> 야식</label>
+        <label><input type="radio" name="situation" value="안주"> 안주</label>
+        <label><input type="radio" name="situation" value="초스피드"> 초스피드</label>
+        <label><input type="radio" name="situation" value="손님접대"> 손님접대</label>
+      </div>
+
+      <div class="option-row">
+        <strong>&lt; 건강 &gt;</strong>
+        <label><input type="radio" name="health" value="위건강"> 위건강</label>
+        <label><input type="radio" name="health" value="장건강"> 장건강</label>
+        <label><input type="radio" name="health" value="혈당조절"> 혈당조절</label>
+        <label><input type="radio" name="health" value="간건강"> 간건강</label>
+        <label><input type="radio" name="health" value="혈액순환"> 혈액순환</label>
+      </div>
+
+      <div class="option-row">
+        <strong>&lt; 방법 &gt;</strong>
+        <label><input type="radio" name="method" value="볶음"> 볶음</label>
+        <label><input type="radio" name="method" value="끓이기"> 끓이기</label>
+        <label><input type="radio" name="method" value="비빔"> 비빔</label>
+        <label><input type="radio" name="method" value="굽기"> 굽기</label>
+        <label><input type="radio" name="method" value="삶기"> 삶기</label>
+      </div>
+    </section>
+
+    <section class="survey-section">
+      <h2>2. 사용할 재료를 입력해주세요.</h2>
+
+      <div class="input-wrap">
+        <input id="ingredients" type="text" placeholder="예: 김치, 계란, 밥" />
+        <button onclick="clearInput('ingredients')">×</button>
+      </div>
+
+      <p class="hint">* 2개 이상의 재료는 쉼표(,)로 구분해 주세요.</p>
+    </section>
+
+    <section class="survey-section">
+      <h2>3. 세부적인 음식 취향을 입력해 주세요.</h2>
+
+      <div class="taste-box">
+        <label>- 싫어하는 식감</label>
+        <div class="small-input-wrap">
+          <input id="texture" type="text" />
+          <button onclick="clearInput('texture')">×</button>
+        </div>
+
+        <label>- 싫어하는 식재료</label>
+        <div class="small-input-wrap">
+          <input id="hateIngredient" type="text" />
+          <button onclick="clearInput('hateIngredient')">×</button>
+        </div>
+
+        <label>- 선호하는 맵기 정도</label>
+        <div class="small-input-wrap">
+          <input id="spicy" type="text" placeholder="예: 안 매운맛, 보통, 매운맛" />
+          <button onclick="clearInput('spicy')">×</button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="survey-footer">
+      <button onclick="location.href='index.html'">← 이전</button>
+      <button onclick="goResult()">다음 →</button>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
