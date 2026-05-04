@@ -1,210 +1,89 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>냉키트 - 맞춤 레시피</title>
-    <style>
-        :root {
-            --main-color: #f8f8f8;
-            --border-color: #ddd;
-            --text-dark: #333;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>냉키트 로그인</title>
 
-        body {
-            font-family: 'Pretendard', sans-serif;
-            background-color: #fff;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 500px;
-            border: 1px solid var(--border-color);
-            min-height: 100vh;
-            padding-bottom: 80px;
-            position: relative;
-        }
-
-        /* 헤더 영역 */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #FFD400; /* 노랑 */
-            text-shadow: 1px 1px 0 #000;
-        }
-
-        /* 섹션 공통 */
-        section {
-            padding: 20px;
-            border-bottom: 1px dashed #ccc;
-        }
-
-        h2 {
-            font-size: 16px;
-            margin-bottom: 15px;
-        }
-
-        .category-group {
-            margin-bottom: 15px;
-        }
-
-        .category-title {
-            font-weight: bold;
-            font-size: 14px;
-            display: inline-block;
-            width: 60px;
-        }
-
-        .options {
-            display: inline-flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .options label {
-            font-size: 13px;
-            cursor: pointer;
-        }
-
-        /* 입력창 스타일 */
-        input[type="text"] {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #aaa;
-            border-radius: 4px;
-            box-sizing: border-box;
-            margin-top: 8px;
-        }
-
-        .sub-desc {
-            font-size: 11px;
-            color: #888;
-            margin-top: 5px;
-        }
-
-        .detail-input-group {
-            margin-bottom: 15px;
-        }
-
-        .detail-input-group label {
-            font-size: 14px;
-            font-weight: bold;
-        }
-
-        /* 하단 네비게이션 */
-        footer {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            padding: 15px;
-            box-sizing: border-box;
-            background: #fff;
-        }
-
-        .nav-btn {
-            background: none;
-            border: 1px solid #ccc;
-            padding: 8px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        .next-btn {
-            border: none;
-            font-weight: bold;
-        }
-    </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <main class="login-page">
+    <section class="login-box">
+      <h1 class="login-title">LOGIN</h1>
 
-<div class="container">
-    <header>
-        <span>☰</span>
-        <div class="logo">냉키트 😋</div>
-        <span>🏠</span>
-    </header>
+      <input
+        id="userId"
+        class="login-input"
+        type="text"
+        placeholder="아이디"
+      />
 
-    <section>
-        <h2>1. 어떤 요리를 만들고 싶으신가요?</h2>
-        
-        <div class="category-group">
-            <span class="category-title">&lt;종류&gt;</span>
-            <div class="options">
-                <label><input type="radio" name="type"> 한식</label>
-                <label><input type="radio" name="type"> 일식</label>
-                <label><input type="radio" name="type"> 중식</label>
-                <label><input type="radio" name="type"> 양식</label>
-                <label><input type="radio" name="type"> 디저트</label>
-            </div>
-        </div>
+      <input
+        id="userPw"
+        class="login-input"
+        type="password"
+        placeholder="비밀번호"
+      />
 
-        <div class="category-group">
-            <span class="category-title">&lt;상황&gt;</span>
-            <div class="options">
-                <label><input type="radio" name="sit"> 다이어트</label>
-                <label><input type="radio" name="sit"> 이유식</label>
-                <label><input type="radio" name="sit"> 안주</label>
-                <label><input type="radio" name="sit"> 초스피드</label>
-                <label><input type="radio" name="sit"> 손님접대</label>
-            </div>
-        </div>
+      <button class="login-button" onclick="login()">
+        →
+      </button>
 
-        <div class="category-group">
-            <span class="category-title">&lt;방법&gt;</span>
-            <div class="options">
-                <label><input type="radio" name="how"> 볶음</label>
-                <label><input type="radio" name="how"> 끓이기</label>
-                <label><input type="radio" name="how"> 비빔</label>
-                <label><input type="radio" name="how"> 굽기</label>
-                <label><input type="radio" name="how"> 삶기</label>
-            </div>
-        </div>
+      <p class="find-text">아이디 / 비밀번호를 잊으셨나요?</p>
+
+      <div class="bottom-links">
+        <a href="#">회원가입</a>
+        <span>OR</span>
+        <a href="#" onclick="skipLogin()">건너뛰기</a>
+      </div>
     </section>
+  </main>
 
-    <section>
-        <h2>2. 사용할 재료를 입력해주세요.</h2>
-        <input type="text" placeholder="예: 양파, 계란, 스팸">
-        <div class="sub-desc">* 2개 이상의 재료는 쉼표(,)로 구분해 주세요.</div>
+  <script src="script.js"></script>
+</body>
+</html><!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>냉키트 로그인</title>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="login-page">
+    <section class="login-box">
+      <h1 class="login-title">LOGIN</h1>
+
+      <input
+        id="userId"
+        class="login-input"
+        type="text"
+        placeholder="아이디"
+      />
+
+      <input
+        id="userPw"
+        class="login-input"
+        type="password"
+        placeholder="비밀번호"
+      />
+
+      <button class="login-button" onclick="login()">
+        →
+      </button>
+
+      <p class="find-text">아이디 / 비밀번호를 잊으셨나요?</p>
+
+      <div class="bottom-links">
+        <a href="#">회원가입</a>
+        <span>OR</span>
+        <a href="#" onclick="skipLogin()">건너뛰기</a>
+      </div>
     </section>
+  </main>
 
-    <section style="border-bottom: none;">
-        <h2>3. 세부적인 음식 취향을 입력해 주세요.</h2>
-        
-        <div class="detail-input-group">
-            <label>- 싫어하는 식감</label>
-            <input type="text">
-        </div>
-
-        <div class="detail-input-group">
-            <label>- 싫어하는 식재료</label>
-            <input type="text">
-        </div>
-
-        <div class="detail-input-group">
-            <label>- 선호하는 맵기 정도</label>
-            <input type="text">
-        </div>
-    </section>
-
-    <footer>
-        <button class="nav-btn">← 이전</button>
-        <button class="nav-btn next-btn">다음 →</button>
-    </footer>
-</div>
-
+  <script src="script.js"></script>
 </body>
 </html>
