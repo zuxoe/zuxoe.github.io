@@ -3,36 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>냉키트 - 설문</title>
+    <title>냉키트 - 설문 입력</title>
     <style>
         body { font-family: sans-serif; background: #f5f5f5; display: flex; justify-content: center; margin: 0; }
         .wrapper { width: 100%; max-width: 480px; background: #fff; min-height: 100vh; border: 1px solid #ddd; display: flex; flex-direction: column; }
         
-        /* 헤더 스타일 */
-        header { padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; position: relative; }
-        .menu-icon { font-size: 24px; cursor: pointer; font-weight: bold; }
-        .logo-img { height: 55px; cursor: pointer; }
-        .home-icon { font-size: 24px; cursor: pointer; }
+        /* 상단 헤더 */
+        header { padding: 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; }
+        .menu-icon, .home-icon { font-size: 24px; cursor: pointer; }
+        .logo { font-size: 24px; font-weight: bold; color: #ffcc00; text-shadow: 1px 1px 1px #000; cursor: pointer; }
 
-        .container { padding: 15px; font-size: 14px; font-weight: bold; }
-        section { margin-bottom: 20px; }
-        .sec-title { font-size: 15px; margin-bottom: 10px; font-weight: bold; }
+        .container { padding: 20px; flex: 1; }
+        h2 { font-size: 18px; margin-top: 0; margin-bottom: 15px; color: #111; }
         
-        .grid-options { display: flex; flex-direction: column; gap: 8px; background: #fff; padding: 5px 0; }
-        .option-row { display: flex; align-items: center; font-size: 13px; }
-        .option-row span { width: 60px; color: #000; font-weight: bold; }
-        .items { display: flex; flex-wrap: wrap; gap: 8px; flex: 1; }
-        .items label { display: flex; align-items: center; gap: 3px; cursor: pointer; font-weight: normal; margin-right: 5px; }
+        /* 설문 섹션 및 점선 분리선 */
+        section { margin-bottom: 25px; }
+        .divider { border: 0; border-top: 1px dotted #aaa; margin: 25px 0; }
 
-        input[type="text"] { width: 100%; padding: 12px; border: 2px solid #555; border-radius: 4px; box-sizing: border-box; font-size: 14px; background: #fff; }
-        .sub-text { font-size: 11px; color: #999; margin-top: 4px; font-weight: normal; }
+        /* 라디오 버튼 그룹 레이아웃 (손그림 매칭) */
+        .filter-group { display: flex; flex-direction: column; gap: 12px; margin-bottom: 10px; }
+        .filter-row { display: flex; align-items: flex-start; line-height: 1.4; }
+        .filter-label { width: 85px; font-weight: bold; color: #000; font-size: 14px; flex-shrink: 0; }
+        .filter-options { display: flex; flex-wrap: wrap; gap: 8px; flex: 1; }
+        .filter-options label { font-size: 13px; font-weight: normal; cursor: pointer; display: flex; align-items: center; gap: 3px; margin-right: 4px; }
 
-        .taste-group { margin-bottom: 12px; }
-        .taste-label { font-size: 13px; margin-bottom: 4px; font-weight: bold; color: #333; }
+        /* 입력창 스타일 */
+        .input-title { font-size: 14px; font-weight: bold; margin-bottom: 8px; color: #333; }
+        input[type="text"] { width: 100%; padding: 12px; box-sizing: border-box; border: 2px solid #333; border-radius: 4px; font-size: 14px; }
+        .sub-desc { font-size: 11px; color: #888; margin-top: 5px; }
 
-        footer { margin-top: auto; padding: 15px; display: flex; justify-content: space-between; border-top: 1px solid #eee; background: #fff; }
-        .nav-btn { padding: 10px 20px; border: 1px solid #ccc; background: #f5f5f5; cursor: pointer; border-radius: 4px; font-weight: bold; display: flex; align-items: center; gap: 5px; }
-        .next-btn { background: #e0e0e0; border: 1px solid #999; }
+        .taste-block { margin-bottom: 15px; }
+
+        /* 하단 네비게이션 바 */
+        footer { padding: 15px 20px; display: flex; justify-content: space-between; border-top: 1px solid #eee; background: #fff; margin-top: auto; }
+        .nav-btn { padding: 10px 22px; border: 1px solid #ccc; background: #fff; cursor: pointer; border-radius: 20px; font-weight: bold; font-size: 14px; }
+        .next-btn { background: #ffe4e1; border: 1px solid #ffb6c1; }
     </style>
 </head>
 <body>
@@ -40,107 +45,5 @@
 <div class="wrapper">
     <header>
         <div class="menu-icon">☰</div>
-        <img src="https://i.ibb.co/6wYgby9/logo.jpg" class="logo-img" onclick="location.href='login.html'" onerror="this.style.display='none'; document.getElementById('textLogo').style.display='block';">
-        <div id="textLogo" style="display:none; font-size:24px; font-weight:bold; color:#ffcc00;">냉키트😜</div>
+        <div class="logo" onclick="location.href='login.html'">냉키트 😋</div>
         <div class="home-icon" onclick="location.href='login.html'">🏠</div>
-    </header>
-
-    <div class="container">
-        <section>
-            <div class="sec-title">1. 어떤 요리를 만들고 싶으신가요?</div>
-            <div class="grid-options">
-                <div class="option-row">
-                    <span>&lt;종류&gt;</span>
-                    <div class="items">
-                        <label><input type="radio" name="category" value="한식" checked> 한식</label>
-                        <label><input type="radio" name="category" value="일식"> 일식</label>
-                        <label><input type="radio" name="category" value="중식"> 중식</label>
-                        <label><input type="radio" name="category" value="양식"> 양식</label>
-                        <label><input type="radio" name="category" value="디저트"> 디저트</label>
-                    </div>
-                </div>
-                <div class="option-row">
-                    <span>&lt;상황&gt;</span>
-                    <div class="items">
-                        <label><input type="radio" name="situation" value="다이어트" checked> 다이어트</label>
-                        <label><input type="radio" name="situation" value="이유식"> 이유식</label>
-                        <label><input type="radio" name="situation" value="안주"> 안주</label>
-                        <label><input type="radio" name="situation" value="초스피드"> 초스피드</label>
-                        <label><input type="radio" name="situation" value="손님접대"> 손님접대</label>
-                    </div>
-                </div>
-                <div class="option-row">
-                    <span>&lt;건강&gt;</span>
-                    <div class="items">
-                        <label><input type="radio" name="health" value="위건강" checked> 위건강</label>
-                        <label><input type="radio" name="health" value="장건강"> 장건강</label>
-                        <label><input type="radio" name="health" value="혈당조절"> 혈당조절</label>
-                        <label><input type="radio" name="health" value="간 건강"> 간 건강</label>
-                        <label><input type="radio" name="health" value="혈액순환"> 혈액순환</label>
-                    </div>
-                </div>
-                <div class="option-row">
-                    <span>&lt;방법&gt;</span>
-                    <div class="items">
-                        <label><input type="radio" name="method" value="볶음" checked> 볶음</label>
-                        <label><input type="radio" name="method" value="끓이기"> 끓이기</label>
-                        <label><input type="radio" name="method" value="비빔"> 비빔</label>
-                        <label><input type="radio" name="method" value="굽기"> 굽기</label>
-                        <label><input type="radio" name="method" value="삶기"> 삶기</label>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <hr style="border:0; border-top:1px dotted #ccc; margin:20px 0;">
-
-        <section>
-            <div class="sec-title">2. 사용할 재료를 입력해주세요.</div>
-            <input type="text" id="ingredients" placeholder="예: 김치, 돼지고기, 두부">
-            <div class="sub-text">* 2개 이상의 재료는 쉼표(,)로 구분해 주세요.</div>
-        </section>
-
-        <hr style="border:0; border-top:1px dotted #ccc; margin:20px 0;">
-
-        <section>
-            <div class="sec-title">3. 세부적인 음식 취향을 입력해 주세요.</div>
-            <div class="taste-group">
-                <div class="taste-label">- 싫어하는 식감</div>
-                <input type="text" id="hateTexture" placeholder="예: 질긴, 무른">
-            </div>
-            <div class="taste-group">
-                <div class="taste-label">- 싫어하는 식재료</div>
-                <input type="text" id="hateIng" placeholder="예: 오이, 당근">
-            </div>
-            <div class="taste-group">
-                <div class="taste-label">- 선호하는 맵기 정도</div>
-                <input type="text" id="likeSpicy" placeholder="예: 신라면 맵기, 순한맛">
-            </div>
-        </section>
-    </div>
-
-    <footer>
-        <button class="nav-btn" onclick="location.href='login.html'">🔎 이전</button>
-        <button class="nav-btn next-btn" onclick="goNext()">다음 ➔</button>
-    </footer>
-</div>
-
-<script>
-    function goNext() {
-        const surveyData = {
-            category: document.querySelector('input[name="category"]:checked').value,
-            situation: document.querySelector('input[name="situation"]:checked').value,
-            health: document.querySelector('input[name="health"]:checked').value,
-            method: document.querySelector('input[name="method"]:checked').value,
-            ingredients: document.getElementById('ingredients').value,
-            hateTexture: document.getElementById('hateTexture').value,
-            hateIng: document.getElementById('hateIng').value,
-            likeSpicy: document.getElementById('likeSpicy').value
-        };
-        localStorage.setItem('surveyData', JSON.stringify(surveyData));
-        location.href = 'recipe.html';
-    }
-</script>
-
-</body>
-</html>
