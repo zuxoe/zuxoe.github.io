@@ -11,138 +11,26 @@
             --border-dark: #333333;
             --accent-pink: #ffe4e1;
         }
-
-        body {
-            font-family: sans-serif;
-            background-color: #f5f5f5;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-        }
-
-        .wrapper {
-            width: 100%;
-            max-width: 480px;
-            background-color: var(--bg-color);
-            min-height: 100vh;
-            border-left: 1px solid #ddd;
-            border-right: 1px solid #ddd;
-            display: flex;
-            flex-direction: column;
-            padding-bottom: 30px;
-        }
-
-        /* 헤더 */
-        header {
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #eee;
-        }
+        body { font-family: sans-serif; background-color: #f5f5f5; margin: 0; display: flex; justify-content: center; }
+        .wrapper { width: 100%; max-width: 480px; background-color: var(--bg-color); min-height: 100vh; border-left: 1px solid #ddd; border-right: 1px solid #ddd; display: flex; flex-direction: column; padding-bottom: 30px; }
+        header { padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; }
         .logo { font-size: 28px; font-weight: 900; letter-spacing: -1px; text-decoration: none; }
         .logo span:nth-child(1) { color: #FFC107; }
         .logo span:nth-child(2) { color: #2196F3; }
         .logo span:nth-child(3) { color: #4CAF50; }
-
-        .user-info-bar {
-            background-color: #fdf8e2;
-            padding: 10px 20px;
-            font-size: 13px;
-            border-bottom: 1px solid #eee;
-            color: #555;
-        }
-
-        /* 레시피 리스트 */
-        .recipe-list {
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .recipe-card {
-            display: flex;
-            border: 2px solid var(--border-dark);
-            border-radius: 4px;
-            background-color: var(--card-bg);
-            padding: 10px;
-            position: relative;
-            box-shadow: 2px 2px 0px rgba(0,0,0,0.1);
-        }
-
-        .bookmark {
-            position: absolute;
-            top: 5px;
-            right: 8px;
-            color: #ff9800;
-            font-size: 20px;
-        }
-
-        .img-placeholder {
-            width: 100px;
-            height: 100px;
-            border: 1px solid var(--border-dark);
-            background-color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 13px;
-            font-weight: bold;
-            flex-shrink: 0;
-        }
-
-        .recipe-info {
-            margin-left: 15px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .recipe-title {
-            font-size: 18px;
-            font-weight: bold;
-            margin: 0 0 8px 0;
-        }
-
+        .user-info-bar { background-color: #fdf8e2; padding: 10px 20px; font-size: 13px; border-bottom: 1px solid #eee; color: #555; }
+        .recipe-list { padding: 15px; display: flex; flex-direction: column; gap: 15px; }
+        .recipe-card { display: flex; border: 2px solid var(--border-dark); border-radius: 4px; background-color: var(--card-bg); padding: 10px; position: relative; box-shadow: 2px 2px 0px rgba(0,0,0,0.1); }
+        .bookmark { position: absolute; top: 5px; right: 8px; color: #ff9800; font-size: 20px; }
+        .img-placeholder { width: 100px; height: 100px; border: 1px solid var(--border-dark); background-color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: bold; flex-shrink: 0; }
+        .recipe-info { margin-left: 15px; flex: 1; display: flex; flex-direction: column; }
+        .recipe-title { font-size: 18px; font-weight: bold; margin: 0 0 8px 0; }
         .stars { color: #ffeb3b; text-shadow: 1px 1px 0 #000; font-size: 14px; margin-left: 5px; }
-
-        .recipe-details {
-            font-size: 12px;
-            line-height: 1.5;
-            color: #333;
-            margin: 2px 0;
-        }
-
-        .btn-group {
-            margin-top: auto;
-            display: flex;
-            justify-content: flex-end;
-            gap: 5px;
-        }
-
-        .btn {
-            padding: 4px 8px;
-            font-size: 11px;
-            font-weight: bold;
-            border: 1px solid var(--border-dark);
-            background-color: var(--accent-pink);
-            cursor: pointer;
-            border-radius: 2px;
-        }
-
+        .recipe-details { font-size: 12px; line-height: 1.5; color: #333; margin: 2px 0; }
+        .btn-group { margin-top: auto; display: flex; justify-content: flex-end; gap: 5px; }
+        .btn { padding: 4px 8px; font-size: 11px; font-weight: bold; border: 1px solid var(--border-dark); background-color: var(--accent-pink); cursor: pointer; border-radius: 2px; }
         .btn-end { background-color: #fff; }
-
-        .back-btn {
-            margin: 20px;
-            padding: 12px;
-            background: #333;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-        }
+        .back-btn { margin: 20px; padding: 12px; background: #333; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -156,17 +44,13 @@
         <div onclick="location.href='index.html'" style="font-size:24px; cursor:pointer;">🏠</div>
     </header>
 
-    <div class="user-info-bar" id="userInfo">
-        선택한 종류: 가져오는 중...
-    </div>
-
+    <div class="user-info-bar" id="userInfo">데이터를 불러오는 중...</div>
     <div id="list" class="recipe-list"></div>
-
     <button class="back-btn" onclick="location.href='index.html'">← 다시 골라볼래요</button>
 </div>
 
 <script>
-    // 1. 대폭 확장된 음식 데이터베이스 (여기에 원하는 요리를 계속 추가하시면 됩니다!)
+    // 카테고리별 20개씩 총 100개의 레시피 데이터베이스
     const recipes = {
         "한식": [
             { name: "김치찌개", star: "⭐", ing: "김치, 돼지고기, 두부, 대파", method: "보글보글 끓이기" },
@@ -174,45 +58,122 @@
             { name: "김치찜", star: "⭐⭐", ing: "묵은지, 돼지 앞다리살, 양파", method: "약불로 오래 조리기" },
             { name: "제육볶음", star: "⭐⭐⭐", ing: "돼지고기, 고추장, 양파, 대파", method: "센 불에 빠르게 볶기" },
             { name: "된장찌개", star: "⭐", ing: "된장, 두부, 애호박, 차돌박이", method: "뚝배기에 끓이기" },
-            { name: "비빔밥", star: "⭐⭐", ing: "밥, 고추장, 계란, 각종 나물류", method: "참기름 넣고 비비기" }
+            { name: "비빔밥", star: "⭐⭐", ing: "밥, 고추장, 계란, 각종 나물류", method: "참기름 넣고 비비기" },
+            { name: "뚝배기 불고기", star: "⭐⭐", ing: "소고기, 간장, 당면, 버섯", method: "달달하게 끓여내기" },
+            { name: "떡볶이", star: "⭐", ing: "떡, 어묵, 고추장, 설탕, 대파", method: "양념에 졸여주기" },
+            { name: "닭볶음탕", star: "⭐⭐⭐", ing: "닭고기, 감자, 고춧가루, 당근", method: "매콤한 양념에 푹 졸이기" },
+            { name: "부대찌개", star: "⭐⭐", ing: "햄, 소시지, 김치, 라면사리, 치즈", method: "육수 붓고 끓이기" },
+            { name: "오징어볶음", star: "⭐⭐", ing: "오징어, 양파, 고추장, 청양고추", method: "불맛 나게 볶아내기" },
+            { name: "미역국", star: "⭐", ing: "미역, 소고기, 국간장, 참기름", method: "고기 볶다 물 붓고 끓이기" },
+            { name: "잡채", star: "⭐⭐⭐", ing: "당면, 시금치, 당근, 돼지고기, 간장", method: "재료 볶아 당면과 버무리기" },
+            { name: "순두부찌개", star: "⭐⭐", ing: "순두부, 바지락, 고추기름, 계란", method: "칼칼하게 끓여 계란 탁" },
+            { name: "계란말이", star: "⭐", ing: "계란, 대파, 소금, 당근", method: "팬에서 얇게 굴려가며 말기" },
+            { name: "갈비찜", star: "⭐⭐⭐", ing: "소갈비, 간장, 무, 밤, 대추", method: "양념장에 오랜 시간 졸이기" },
+            { name: "김치전", star: "⭐", ing: "김치, 부침가루, 물, 기름", method: "팬에 얇고 바삭하게 굽기" },
+            { name: "보쌈", star: "⭐⭐⭐", ing: "돼지 삼겹살, 된장, 마늘, 양파, 통후추", method: "잡내 잡아 푹 삶아내기" },
+            { name: "감자탕", star: "⭐⭐⭐", ing: "돼지등뼈, 시래기, 들깨가루, 감자", method: "뼈가 쏙 빠지게 푹 고기" },
+            { name: "육개장", star: "⭐⭐⭐", ing: "소고기, 고사리, 대파, 고추기름", method: "얼큰하게 오랜 시간 끓이기" }
         ],
         "일식": [
-            { name: "연어초밥", star: "⭐⭐⭐", ing: "연어 필렛, 단초물 밥, 와사비", method: "한입 크기로 뭉쳐서 올리기" },
-            { name: "돈카츠", star: "⭐⭐", ing: "돼 등심, 빵가루, 계란, 밀가루", method: "바삭하게 튀겨내기" },
-            { name: "돈코츠 라멘", star: "⭐⭐⭐", ing: "라멘 생면, 차슈, 사골 육수", method: "면을 삶고 육수 붓기" },
-            { name: "규동(소고기덮밥)", star: "⭐", ing: "우삼겹, 양파, 쯔유 소스, 계란", method: "소스에 졸여 밥 위에 얹기" },
-            { name: "야키소바", star: "⭐⭐", ing: "면, 양배추, 삼겹살, 야키소바 소스", method: "철판에 달달 볶기" }
+            { name: "연어초밥", star: "⭐⭐⭐", ing: "연어, 밥, 식초, 와사비", method: "밥 뭉쳐 연어 올리기" },
+            { name: "돈카츠", star: "⭐⭐", ing: "돼지고기 등심, 빵가루, 계란, 소스", method: "기름에 바삭하게 튀기기" },
+            { name: "돈코츠 라멘", star: "⭐⭐⭐", ing: "라멘 생면, 사골육수, 차슈, 계란", method: "진한 육수에 면 삶아내기" },
+            { name: "규동(소고기덮밥)", star: "⭐", ing: "우삼겹, 양파, 쯔유 소스, 밥", method: "소스에 졸여 밥 위에 얹기" },
+            { name: "야키소바", star: "⭐⭐", ing: "면, 양배추, 삼겹살, 야키소바소스", method: "철판에 재료 다 같이 볶기" },
+            { name: "가츠동", star: "⭐⭐", ing: "돈까스, 계란, 양파, 쯔유, 밥", method: "돈까스 위 계란물 풀어 졸이기" },
+            { name: "오코노미야끼", star: "⭐⭐", ing: "양배추, 부침가루, 베이컨, 가쓰오부시", method: "반죽 구워 소스 뿌리기" },
+            { name: "우동", star: "⭐", ing: "우동면, 가쓰오육수, 쑥갓, 어묵", method: "뜨끈한 국물에 면 삶기" },
+            { name: "사케동(연어덮밥)", star: "⭐⭐", ing: "생연어, 밥, 간장소스, 무순", method: "양념 밥 위에 연어 두르기" },
+            { name: "타코야끼", star: "⭐⭐⭐", ing: "문어, 반죽물, 타코야끼 소스, 마요네즈", method: "틀에 굴려가며 동그랗게 굽기" },
+            { name: "에비후라이(새우튀김)", star: "⭐⭐", ing: "왕새우, 튀김가루, 빵가루", method: "노릇하고 바삭하게 튀기기" },
+            { name: "하이라이스", star: "⭐", ing: "소고기, 양파, 하이라이스 가루, 버섯", method: "카레처럼 뭉근하게 끓이기" },
+            { name: "메밀소바", star: "⭐", ing: "메밀면, 쯔유, 갈은 무, 와사비", method: "면 삶아 차가운 소스에 적시기" },
+            { name: "나가사키 짬뽕", star: "⭐⭐", ing: "숙주, 해물, 돼지고기, 하얀 육수", method: "진하고 칼칼하게 끓이기" },
+            { name: "야키토리(닭꼬치)", star: "⭐⭐", ing: "닭고기, 대파, 데리야끼 소스", method: "꼬치에 끼워 직화나 팬에 굽기" },
+            { name: "텐동(튀김덮밥)", star: "⭐⭐⭐", ing: "모듬 튀김, 밥, 특제 간장 소스", method: "밥 위에 바삭한 튀김 쌓기" },
+            { name: "샤부샤부", star: "⭐⭐", ing: "얇은 소고기, 알배추, 버섯, 폰즈소스", method: "육수에 재료 살짝 데쳐 먹기" },
+            { name: "스키야키", star: "⭐⭐⭐", ing: "소고기, 두부, 곤약면, 날계란", method: "자작한 간장 양념에 구워 계란 찍기" },
+            { name: "장어덮밥(우나동)", star: "⭐⭐⭐", ing: "양념 장어, 특제 소스, 밥", method: "장어를 구워 밥 위에 얹기" },
+            { name: "치킨 가라아게", star: "⭐⭐", ing: "닭다리살, 전분가루, 간장, 생강", method: "일본식으로 바삭하게 튀기기" }
         ],
         "중식": [
-            { name: "짜장면", star: "⭐⭐⭐", ing: "중화면, 춘장, 돼지고기, 양파", method: "춘장을 볶아 면 위에 얹기" },
-            { name: "짬뽕", star: "⭐⭐", ing: "중화면, 고춧가루, 오징어, 홍합, 배추", method: "불맛 나게 볶아 끓이기" },
-            { name: "탕수육", star: "⭐⭐⭐", ing: "돼지고기, 전분가루, 소스용 야채", method: "바삭하게 튀겨 소스 붓기/찍기" },
-            { name: "마파두부", star: "⭐", ing: "두부, 다진고기, 두반장, 전분물", method: "매콤하게 졸여내기" },
-            { name: "멘보샤", star: "⭐⭐⭐", ing: "식빵, 다진 새우, 계란흰자", method: "낮은 온도 식빵 튀기기" }
+            { name: "짜장면", star: "⭐⭐⭐", ing: "중화면, 춘장, 돼지고기, 양파", method: "춘장 볶아 면 위에 얹기" },
+            { name: "짬뽕", star: "⭐⭐", ing: "중화면, 고춧가루, 오징어, 홍합, 배추", method: "불맛 나게 볶아 얼큰히 끓이기" },
+            { name: "탕수육", star: "⭐⭐⭐", ing: "돼지고기, 전분가루, 소스용 야채", method: "튀겨서 새콤달콤 소스 곁들이기" },
+            { name: "마파두부", star: "⭐", ing: "두부, 다진고기, 두반장, 전분물", method: "매콤하고 자작하게 졸여내기" },
+            { name: "멘보샤", star: "⭐⭐⭐", ing: "식빵, 다진 새우, 계란흰자", method: "식빵 사이에 새우 넣고 튀기기" },
+            { name: "꿔바로우", star: "⭐⭐⭐", ing: "돼지 등심, 찹쌀가루, 새콤 소스", method: "넙적하게 튀겨 소스 묻히기" },
+            { name: "고추잡채", star: "⭐⭐", ing: "피망, 돼지고기 채, 굴소스, 꽃빵", method: "굴소스에 볶아 꽃빵과 싸 먹기" },
+            { name: "양장피", star: "⭐⭐⭐", ing: "전분피, 각종 해산물/야채, 겨자소스", method: "겨자소스에 톡 쏘게 버무리기" },
+            { name: "깐풍기", star: "⭐⭐⭐", ing: "닭고기, 간장, 식초, 고추기름", method: "튀긴 닭을 매콤새콤 소스에 졸이기" },
+            { name: "칠리새우", star: "⭐⭐", ing: "알새우, 전분, 칠리소스, 케첩", method: "새우 튀겨 매콤달콤 소스 버무리기" },
+            { name: "동파육", star: "⭐⭐⭐", ing: "통삼겹살, 청경채, 팔각, 노추간장", method: "약불에서 부드러워질 때까지 조리기" },
+            { name: "볶음밥", star: "⭐", ing: "밥, 계란, 당근, 파, 굴소스", method: "고슬고슬하게 불맛 살려 볶기" },
+            { name: "마라탕", star: "⭐⭐", ing: "마라소스, 사골국물, 푸주, 당면, 숙주", method: "원하는 재료 다 넣고 끓이기" },
+            { name: "마라샹궈", star: "⭐⭐⭐", ing: "마라소스, 삼겹살, 청경채, 버섯, 면", method: "마라 기름에 강하게 볶아내기" },
+            { name: "토마토 달걀볶음", star: "⭐", ing: "토마토, 달걀, 소금, 대파", method: "달걀 스크램블에 토마토 볶기" },
+            { name: "유린기", star: "⭐⭐", ing: "닭고기, 양상추, 청양고추, 간장소스", method: "바삭한 닭튀김에 새콤 소스 붓기" },
+            { name: "울면", star: "⭐", ing: "중화면, 계란, 해물, 전분물", method: "걸쭉하고 담백하게 끓여내기" },
+            { name: "군만두", star: "⭐", ing: "시판 만두, 기름", method: "겉바속촉으로 노릇하게 굽기" },
+            { name: "크림새우", star: "⭐⭐", ing: "새우, 튀김옷, 마요네즈, 레몬즙", method: "튀긴 새우에 부드러운 크림 버무리기" },
+            { name: "짜장밥", star: "⭐", ing: "밥, 춘장소스, 계란후라이", method: "고슬한 밥 위에 짜장 소스 얹기" }
         ],
         "양식": [
-            { name: "알리오 올리오", star: "⭐", ing: "파스타면, 마늘, 올리브유, 페페론치노", method: "오일에 마늘향 내어 볶기" },
-            { name: "까르보나라", star: "⭐⭐", ing: "파스타면, 베이컨, 계란노른자, 치즈가루", method: "불을 끄고 소스 잔열로 비비기" },
-            { name: "토마토 미트볼 스파게티", star: "⭐⭐", ing: "파스타면, 토마토소스, 다진고기 완자", method: "소스와 면을 함께 졸이기" },
-            { name: "티본 스테이크", star: "⭐⭐⭐", ing: "티본 소고기, 버터, 로즈마리, 마늘", method: "팬에 시어링하며 굽기" },
-            { name: "고르곤졸라 피자", star: "⭐", ing: "또또아/피자도우, 고르곤졸라 치즈, 꿀", method: "오븐이나 에어프라이어 구우면 끝" }
+            { name: "알리오 올리오", star: "⭐", ing: "파스타면, 마늘, 올리브유, 페페론치노", method: "오일에 마늘향 내어 면 볶기" },
+            { name: "까르보나라", star: "⭐⭐", ing: "파스타면, 베이컨, 계란노른자, 치즈", method: "노른자 소스로 꾸덕하게 비비기" },
+            { name: "토마토 스파게티", star: "⭐⭐", ing: "파스타면, 토마토소스, 다진고기", method: "소스와 면을 함께 달달 볶기" },
+            { name: "티본 스테이크", star: "⭐⭐⭐", ing: "티본 소고기, 버터, 로즈마리, 마늘", method: "팬에 시어링하며 육즙 가두어 굽기" },
+            { name: "고르곤졸라 피자", star: "⭐", ing: "또또아 도우, 고르곤졸라 치즈, 꿀", method: "에어프라이어에 구워 꿀 찍어 먹기" },
+            { name: "시저 샐러드", star: "⭐", ing: "로메인, 크루통, 시저드레싱, 치즈가루", method: "소스와 야채 가볍게 버무리기" },
+            { name: "감바스 알 아히요", star: "⭐⭐", ing: "새우, 올리브유, 마늘, 바게트 빵", method: "오일에 마늘과 새우 익혀 빵 곁들이기" },
+            { name: "바베큐 폭립", star: "⭐⭐⭐", ing: "등갈비, 바베큐 소스, 허브", method: "오븐이나 에프에 소스 발라 굽기" },
+            { name: "라자냐", star: "⭐⭐⭐", ing: "라자냐 면, 미트소스, 베샤멜소스, 치즈", method: "층층이 쌓아 오븐에 노릇하게 굽기" },
+            { name: "크림 리조또", star: "⭐⭐", ing: "쌀/밥, 생크림, 우유, 버섯, 베이컨", method: "크림 소스에 밥 넣고 뭉근히 졸이기" },
+            { name: "양송이 스프", star: "⭐", ing: "양송이버섯, 루(밀가루+버터), 우유", method: "버섯 갈아 부드럽게 끓여내기" },
+            { name: "클래식 치즈버거", star: "⭐⭐", ing: "버거번, 소고기 패티, 체다치즈, 양파", method: "패티 구워 치즈 녹여 올리기" },
+            { name: "맥앤치즈", star: "⭐", ing: "마카로니, 치즈소스, 버터", method: "삶은 면을 치즈에 꾸덕하게 조리기" },
+            { name: "프렌치 프라이", star: "⭐", ing: "감자, 소금, 튀김기름", method: "바삭하게 두 번 튀겨 소금치기" },
+            { name: "피쉬 앤 칩스", star: "⭐⭐", ing: "흰살생선 필렛, 튀김반죽, 감자튀김", method: "생선과 감자를 바삭하게 튀기기" },
+            { name: "에그인헬", star: "⭐⭐", ing: "토마토소스, 계란, 소시지, 치즈", method: "소스 위에 계란 깨뜨려 익히기" },
+            { name: "크림 스테이크 파스타", star: "⭐⭐⭐", ing: "파스타면, 크림소스, 소고기 안심", method: "꾸덕한 파스타 위에 고기 토핑" },
+            { name: "클럽 샌드위치", star: "⭐", ing: "식빵, 닭가슴살, 토마토, 베이컨, 양상추", method: "재료 차곡차곡 쌓아 대각선 썰기" },
+            { name: "바질페스토 파스타", star: "⭐⭐", ing: "파스타면, 바질페스토, 올리브유", method: "삶은 면에 페스토 촉촉히 비비기" },
+            { name: "수프림 피자", star: "⭐⭐⭐", ing: "피자 도우, 페퍼로니, 올리브, 피자치즈", method: "토핑 가득 올려 노릇하게 굽기" }
         ],
         "디저트": [
             { name: "크로플", star: "⭐⭐⭐", ing: "크로와상 생지, 메이플 시럽, 아이스크림", method: "와플 팬에 바삭하게 누르기" },
             { name: "초코 브라우니", star: "⭐⭐", ing: "다크 초콜릿, 버터, 밀가루, 계란", method: "반죽을 섞어 오븐에 굽기" },
-            { name: "프렌치 토스트", star: "⭐", ing: "식빵, 계란, 우유, 설탕, 버터", method: "계란물 적셔 팬에 굽기" }
+            { name: "프렌치 토스트", star: "⭐", ing: "식빵, 계란, 우유, 설탕, 버터", method: "계란물 적셔 팬에 노릇하게 굽기" },
+            { name: "마카롱", star: "⭐⭐⭐", ing: "아몬드가루, 계란흰자, 설탕, 필링", method: "꼬끄 구워 크림 채우기" },
+            { name: "츄러스", star: "⭐⭐", ing: "밀가루 반죽, 시나몬 가루, 설탕", method: "길게 짜내어 튀긴 후 설탕 굴리기" },
+            { name: "딸기 생크림 케이크", star: "⭐⭐⭐", ing: "케이크 시트, 생크림, 생딸기", method: "시트 사이 크림과 딸기 바르기" },
+            { name: "티라미수", star: "⭐⭐", ing: "마스카포네 치즈, 에스프레소, 레이디핑거", method: "커피 적신 과자 위에 치즈 채우기" },
+            { name: "에그타르트", star: "⭐⭐", ing: "타르트지, 커스터드 크림 필링", method: "필링 채워 노릇한 색이 나게 굽기" },
+            { name: "초코칩 쿠키", star: "⭐", ing: "밀가루, 버터, 초코칩, 설탕", method: "동그랗게 모양 잡아 오븐 굽기" },
+            { name: "바닐라 아이스크림", star: "⭐", ing: "생크림, 우유, 바닐라 빈, 설탕", method: "재료 섞어 얼려가며 젓기" },
+            { name: "판나코타(푸딩)", star: "⭐⭐", ing: "생크림, 젤라틴, 설탕, 과일시럽", method: "냉장고에 부드럽게 굳히기" },
+            { name: "스콘", star: "⭐", ing: "박력분, 버터, 우유, 딸기잼", method: "투박하게 뭉쳐 구워 잼 곁들이기" },
+            { name: "블루베리 머핀", star: "⭐", ing: "밀가루, 계란, 블루베리, 버터", method: "머핀 틀에 반죽 부어 구워내기" },
+            { name: "당근 케이크", star: "⭐⭐", ing: "갈은 당근, 시나몬가루, 크림치즈", method: "시트 구워 크림치즈 프로스팅 바르기" },
+            { name: "수플레 팬케이크", star: "⭐⭐⭐", ing: "계란(머랭), 밀가루, 우유, 시럽", method: "약불에 뚜껑 닫고 두툼하게 굽기" },
+            { name: "휘낭시에", star: "⭐⭐", ing: "태운 버터, 아몬드가루, 계란흰자", method: "금괴 모양 틀에 바삭하게 굽기" },
+            { name: "치즈케이크", star: "⭐⭐", ing: "크림치즈, 생크림, 계란, 설탕", method: "오븐에 은은하게 구워 차갑게 굳히기" },
+            { name: "바나나 푸딩", star: "⭐", ing: "바나나, 계란과자, 커스터드 크림", method: "크림과 과자, 바나나 층층이 섞기" },
+            { name: "앙버터 모나카", star: "⭐⭐", ing: "모나카 깍지, 팥앙금, 통버터", method: "과자 사이에 팥과 버터 끼우기" },
+            { name: "레몬 파운드 케이크", star: "⭐⭐", ing: "밀가루, 버터, 레몬즙, 슈가파우더", method: "묵직하게 구워 레몬 글레이즈 뿌리기" }
         ]
     };
 
-    // 2. index.html에서 저장한 사용자의 선택 값 가져오기
+    // 저장했던 사용자의 선택 정보 가져오기
     const userChoice = localStorage.getItem('userChoice') || "한식";
     const userIng = localStorage.getItem('userIng') || "없음";
 
-    // 상단 안내 바 업데이트
-    document.getElementById('userInfo').innerHTML = `💡 <strong>${userChoice}</strong> 카테고리 | 내가 가진 재료: <span style="color:#e91e63;">${userIng}</span>`;
+    // 상단 안내문 업데이트
+    document.getElementById('userInfo').innerHTML = `💡 <strong>${userChoice}</strong> 추천 결과 | 내가 가진 재료: <span style="color:#e91e63;">${userIng}</span>`;
 
-    // 3. 필터링된 결과 화면에 꽂아주기
     const listDiv = document.getElementById('list');
+    
+    // 가져온 값에 정확히 매칭되는 음식 데이터 목록 선택
     const selectedList = recipes[userChoice] || [];
 
     if (selectedList.length === 0) {
@@ -227,7 +188,6 @@
                         <h3 class="recipe-title">${item.name} <span class="stars">${item.star}</span></h3>
                         <p class="recipe-details"><strong>필요 재료 :</strong> ${item.ing}</p>
                         <p class="recipe-details"><strong>기본 조리법 :</strong> ${item.method}</p>
-                        <p class="recipe-details" style="color:#888; font-size:11px;">(내가 가진 재료 <strong>"${userIng}"</strong> 활용 가능!)</p>
                         <div class="btn-group">
                             <button class="btn">조리 시작</button>
                             <button class="btn btn-end">조리 종료</button>
