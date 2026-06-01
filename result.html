@@ -1,379 +1,243 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>냉키트 음식 추천</title>
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>냉키트 - 추천결과</title>
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --card-bg: #f9f9fb;
+            --border-dark: #333333;
+            --accent-pink: #ffe4e1;
+        }
 
-    body {
-      margin: 0;
-      background: white;
-      font-family: Arial, sans-serif;
-      color: #111;
-    }
+        body {
+            font-family: sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
 
-    header {
-      height: 120px;
-      border-bottom: 3px dotted #ddd;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 25px;
-    }
+        .wrapper {
+            width: 100%;
+            max-width: 480px;
+            background-color: var(--bg-color);
+            min-height: 100vh;
+            border-left: 1px solid #ddd;
+            border-right: 1px solid #ddd;
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 30px;
+        }
 
-    .menu,
-    .home {
-      font-size: 45px;
-      border: none;
-      background: none;
-      cursor: pointer;
-    }
+        /* 헤더 */
+        header {
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+        }
+        .logo { font-size: 28px; font-weight: 900; letter-spacing: -1px; text-decoration: none; }
+        .logo span:nth-child(1) { color: #FFC107; }
+        .logo span:nth-child(2) { color: #2196F3; }
+        .logo span:nth-child(3) { color: #4CAF50; }
 
-    .logo {
-      font-size: 58px;
-      font-weight: bold;
-    }
+        .user-info-bar {
+            background-color: #fdf8e2;
+            padding: 10px 20px;
+            font-size: 13px;
+            border-bottom: 1px solid #eee;
+            color: #555;
+        }
 
-    .logo span:nth-child(1) {
-      color: #ffd233;
-    }
+        /* 레시피 리스트 */
+        .recipe-list {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
 
-    .logo span:nth-child(2) {
-      color: #66b8ff;
-    }
+        .recipe-card {
+            display: flex;
+            border: 2px solid var(--border-dark);
+            border-radius: 4px;
+            background-color: var(--card-bg);
+            padding: 10px;
+            position: relative;
+            box-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+        }
 
-    .logo span:nth-child(3) {
-      color: #18a542;
-    }
+        .bookmark {
+            position: absolute;
+            top: 5px;
+            right: 8px;
+            color: #ff9800;
+            font-size: 20px;
+        }
 
-    .content {
-      padding: 35px 45px 100px;
-    }
+        .img-placeholder {
+            width: 100px;
+            height: 100px;
+            border: 1px solid var(--border-dark);
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
 
-    h2 {
-      font-size: 32px;
-      margin-bottom: 10px;
-    }
+        .recipe-info {
+            margin-left: 15px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
 
-    .condition {
-      color: #777;
-      font-size: 20px;
-      margin-bottom: 30px;
-    }
+        .recipe-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0 0 8px 0;
+        }
 
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 25px;
-    }
+        .stars { color: #ffeb3b; text-shadow: 1px 1px 0 #000; font-size: 14px; margin-left: 5px; }
 
-    .card {
-      border: 4px solid #333;
-      border-radius: 18px;
-      padding: 22px;
-      min-height: 260px;
-      background: #fff;
-    }
+        .recipe-details {
+            font-size: 12px;
+            line-height: 1.5;
+            color: #333;
+            margin: 2px 0;
+        }
 
-    .food-img {
-      height: 110px;
-      border-radius: 15px;
-      background: #f0f0f0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 55px;
-      margin-bottom: 18px;
-    }
+        .btn-group {
+            margin-top: auto;
+            display: flex;
+            justify-content: flex-end;
+            gap: 5px;
+        }
 
-    .card h3 {
-      font-size: 27px;
-      margin: 0 0 12px;
-    }
+        .btn {
+            padding: 4px 8px;
+            font-size: 11px;
+            font-weight: bold;
+            border: 1px solid var(--border-dark);
+            background-color: var(--accent-pink);
+            cursor: pointer;
+            border-radius: 2px;
+        }
 
-    .card p {
-      font-size: 18px;
-      line-height: 1.5;
-      margin: 6px 0;
-    }
+        .btn-end { background-color: #fff; }
 
-    .tag {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 6px 12px;
-      border-radius: 20px;
-      background: #e8e8e8;
-      font-size: 16px;
-      font-weight: bold;
-    }
-
-    footer {
-      position: fixed;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      background: white;
-      display: flex;
-      justify-content: space-between;
-      padding: 15px 25px;
-    }
-
-    footer button {
-      border: none;
-      border-radius: 12px;
-      background: #e8e8e8;
-      padding: 10px 25px;
-      font-size: 25px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    @media (max-width: 900px) {
-      .cards {
-        grid-template-columns: 1fr;
-      }
-
-      .logo {
-        font-size: 42px;
-      }
-    }
-  </style>
+        .back-btn {
+            margin: 20px;
+            padding: 12px;
+            background: #333;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <button class="menu">☰</button>
-    <div class="logo">
-      <span>냉</span><span>키</span><span>트</span> ＞＜
+
+<div class="wrapper">
+    <header>
+        <div style="font-size:24px; cursor:pointer;">☰</div>
+        <a href="index.html" class="logo">
+            <span>냉</span><span>키</span><span>트</span>
+        </a>
+        <div onclick="location.href='index.html'" style="font-size:24px; cursor:pointer;">🏠</div>
+    </header>
+
+    <div class="user-info-bar" id="userInfo">
+        선택한 종류: 가져오는 중...
     </div>
-    <button class="home" onclick="location.href='index.html'">⌂</button>
-  </header>
 
-  <main class="content">
-    <h2>오늘의 추천 음식</h2>
-    <div id="condition" class="condition"></div>
+    <div id="list" class="recipe-list"></div>
 
-    <div id="cards" class="cards"></div>
-  </main>
+    <button class="back-btn" onclick="location.href='index.html'">← 다시 골라볼래요</button>
+</div>
 
-  <footer>
-    <button onclick="location.href='survey.html'">← 이전</button>
-    <button onclick="location.href='index.html'">처음으로</button>
-  </footer>
+<script>
+    // 1. 대폭 확장된 음식 데이터베이스 (여기에 원하는 요리를 계속 추가하시면 됩니다!)
+    const recipes = {
+        "한식": [
+            { name: "김치찌개", star: "⭐", ing: "김치, 돼지고기, 두부, 대파", method: "보글보글 끓이기" },
+            { name: "김치만두", star: "⭐⭐⭐", ing: "김치, 다진고기, 만두피, 당면", method: "찜기에 푹 찌기" },
+            { name: "김치찜", star: "⭐⭐", ing: "묵은지, 돼지 앞다리살, 양파", method: "약불로 오래 조리기" },
+            { name: "제육볶음", star: "⭐⭐⭐", ing: "돼지고기, 고추장, 양파, 대파", method: "센 불에 빠르게 볶기" },
+            { name: "된장찌개", star: "⭐", ing: "된장, 두부, 애호박, 차돌박이", method: "뚝배기에 끓이기" },
+            { name: "비빔밥", star: "⭐⭐", ing: "밥, 고추장, 계란, 각종 나물류", method: "참기름 넣고 비비기" }
+        ],
+        "일식": [
+            { name: "연어초밥", star: "⭐⭐⭐", ing: "연어 필렛, 단초물 밥, 와사비", method: "한입 크기로 뭉쳐서 올리기" },
+            { name: "돈카츠", star: "⭐⭐", ing: "돼 등심, 빵가루, 계란, 밀가루", method: "바삭하게 튀겨내기" },
+            { name: "돈코츠 라멘", star: "⭐⭐⭐", ing: "라멘 생면, 차슈, 사골 육수", method: "면을 삶고 육수 붓기" },
+            { name: "규동(소고기덮밥)", star: "⭐", ing: "우삼겹, 양파, 쯔유 소스, 계란", method: "소스에 졸여 밥 위에 얹기" },
+            { name: "야키소바", star: "⭐⭐", ing: "면, 양배추, 삼겹살, 야키소바 소스", method: "철판에 달달 볶기" }
+        ],
+        "중식": [
+            { name: "짜장면", star: "⭐⭐⭐", ing: "중화면, 춘장, 돼지고기, 양파", method: "춘장을 볶아 면 위에 얹기" },
+            { name: "짬뽕", star: "⭐⭐", ing: "중화면, 고춧가루, 오징어, 홍합, 배추", method: "불맛 나게 볶아 끓이기" },
+            { name: "탕수육", star: "⭐⭐⭐", ing: "돼지고기, 전분가루, 소스용 야채", method: "바삭하게 튀겨 소스 붓기/찍기" },
+            { name: "마파두부", star: "⭐", ing: "두부, 다진고기, 두반장, 전분물", method: "매콤하게 졸여내기" },
+            { name: "멘보샤", star: "⭐⭐⭐", ing: "식빵, 다진 새우, 계란흰자", method: "낮은 온도 식빵 튀기기" }
+        ],
+        "양식": [
+            { name: "알리오 올리오", star: "⭐", ing: "파스타면, 마늘, 올리브유, 페페론치노", method: "오일에 마늘향 내어 볶기" },
+            { name: "까르보나라", star: "⭐⭐", ing: "파스타면, 베이컨, 계란노른자, 치즈가루", method: "불을 끄고 소스 잔열로 비비기" },
+            { name: "토마토 미트볼 스파게티", star: "⭐⭐", ing: "파스타면, 토마토소스, 다진고기 완자", method: "소스와 면을 함께 졸이기" },
+            { name: "티본 스테이크", star: "⭐⭐⭐", ing: "티본 소고기, 버터, 로즈마리, 마늘", method: "팬에 시어링하며 굽기" },
+            { name: "고르곤졸라 피자", star: "⭐", ing: "또또아/피자도우, 고르곤졸라 치즈, 꿀", method: "오븐이나 에어프라이어 구우면 끝" }
+        ],
+        "디저트": [
+            { name: "크로플", star: "⭐⭐⭐", ing: "크로와상 생지, 메이플 시럽, 아이스크림", method: "와플 팬에 바삭하게 누르기" },
+            { name: "초코 브라우니", star: "⭐⭐", ing: "다크 초콜릿, 버터, 밀가루, 계란", method: "반죽을 섞어 오븐에 굽기" },
+            { name: "프렌치 토스트", star: "⭐", ing: "식빵, 계란, 우유, 설탕, 버터", method: "계란물 적셔 팬에 굽기" }
+        ]
+    };
 
-  <script>
-    const foods = [
-      {
-        name: "김치볶음밥",
-        type: "한식",
-        situation: "초스피드",
-        method: "볶음",
-        health: "",
-        emoji: "🍚",
-        desc: "김치와 밥만 있어도 빠르게 만들 수 있는 대표적인 한식 메뉴입니다."
-      },
-      {
-        name: "된장찌개",
-        type: "한식",
-        situation: "손님접대",
-        method: "끓이기",
-        health: "장건강",
-        emoji: "🥘",
-        desc: "구수한 된장과 채소를 넣어 끓이는 든든한 집밥 메뉴입니다."
-      },
-      {
-        name: "비빔밥",
-        type: "한식",
-        situation: "다이어트",
-        method: "비빔",
-        health: "혈액순환",
-        emoji: "🥗",
-        desc: "여러 채소와 밥을 함께 비벼 먹어 균형 잡힌 한 끼로 좋습니다."
-      },
-      {
-        name: "계란말이",
-        type: "한식",
-        situation: "초스피드",
-        method: "굽기",
-        health: "위건강",
-        emoji: "🍳",
-        desc: "계란만 있으면 쉽게 만들 수 있는 부드러운 반찬입니다."
-      },
-      {
-        name: "오야코동",
-        type: "일식",
-        situation: "초스피드",
-        method: "끓이기",
-        health: "",
-        emoji: "🍛",
-        desc: "닭고기와 계란을 간장 소스에 졸여 밥 위에 올리는 일본식 덮밥입니다."
-      },
-      {
-        name: "연어덮밥",
-        type: "일식",
-        situation: "다이어트",
-        method: "비빔",
-        health: "혈액순환",
-        emoji: "🍣",
-        desc: "연어와 밥, 채소를 함께 먹는 깔끔한 덮밥 메뉴입니다."
-      },
-      {
-        name: "야키소바",
-        type: "일식",
-        situation: "야식",
-        method: "볶음",
-        health: "",
-        emoji: "🍜",
-        desc: "면과 채소를 소스에 볶아 만드는 짭짤한 일본식 볶음면입니다."
-      },
-      {
-        name: "마파두부",
-        type: "중식",
-        situation: "야식",
-        method: "볶음",
-        health: "혈액순환",
-        emoji: "🌶️",
-        desc: "두부와 매콤한 소스를 함께 볶아 밥과 잘 어울리는 중식 메뉴입니다."
-      },
-      {
-        name: "토마토 계란볶음",
-        type: "중식",
-        situation: "초스피드",
-        method: "볶음",
-        health: "위건강",
-        emoji: "🍅",
-        desc: "토마토와 계란으로 빠르게 만들 수 있는 부드러운 중국식 가정식입니다."
-      },
-      {
-        name: "볶음우동",
-        type: "중식",
-        situation: "야식",
-        method: "볶음",
-        health: "",
-        emoji: "🥢",
-        desc: "우동면과 채소, 고기를 넣고 볶아 든든하게 먹기 좋은 메뉴입니다."
-      },
-      {
-        name: "토마토 파스타",
-        type: "양식",
-        situation: "손님접대",
-        method: "끓이기",
-        health: "혈당조절",
-        emoji: "🍝",
-        desc: "토마토 소스를 활용한 깔끔하고 대중적인 양식 메뉴입니다."
-      },
-      {
-        name: "치킨 샐러드",
-        type: "양식",
-        situation: "다이어트",
-        method: "굽기",
-        health: "혈당조절",
-        emoji: "🥗",
-        desc: "구운 닭가슴살과 채소를 함께 먹는 가벼운 한 끼입니다."
-      },
-      {
-        name: "감자수프",
-        type: "양식",
-        situation: "손님접대",
-        method: "끓이기",
-        health: "위건강",
-        emoji: "🥣",
-        desc: "부드럽고 따뜻해서 속이 편한 양식 수프입니다."
-      },
-      {
-        name: "프렌치토스트",
-        type: "디저트",
-        situation: "초스피드",
-        method: "굽기",
-        health: "",
-        emoji: "🍞",
-        desc: "식빵과 계란으로 간단하게 만들 수 있는 달콤한 디저트입니다."
-      },
-      {
-        name: "요거트볼",
-        type: "디저트",
-        situation: "다이어트",
-        method: "비빔",
-        health: "장건강",
-        emoji: "🍓",
-        desc: "요거트와 과일, 견과류를 섞어 먹는 상큼한 디저트입니다."
-      },
-      {
-        name: "바나나 팬케이크",
-        type: "디저트",
-        situation: "손님접대",
-        method: "굽기",
-        health: "",
-        emoji: "🥞",
-        desc: "바나나와 반죽을 구워 만드는 부드럽고 달콤한 디저트입니다."
-      }
-    ];
+    // 2. index.html에서 저장한 사용자의 선택 값 가져오기
+    const userChoice = localStorage.getItem('userChoice') || "한식";
+    const userIng = localStorage.getItem('userIng') || "없음";
 
-    const type = localStorage.getItem("type") || "";
-    const situation = localStorage.getItem("situation") || "";
-    const health = localStorage.getItem("health") || "";
-    const method = localStorage.getItem("method") || "";
-    const ingredients = localStorage.getItem("ingredients") || "";
-    const spicy = localStorage.getItem("spicy") || "";
+    // 상단 안내 바 업데이트
+    document.getElementById('userInfo').innerHTML = `💡 <strong>${userChoice}</strong> 카테고리 | 내가 가진 재료: <span style="color:#e91e63;">${userIng}</span>`;
 
-    document.getElementById("condition").innerText =
-      "선택한 조건: " +
-      (type || "종류 없음") + " / " +
-      (situation || "상황 없음") + " / " +
-      (health || "건강 조건 없음") + " / " +
-      (method || "조리법 없음") +
-      (ingredients ? " / 재료: " + ingredients : "") +
-      (spicy ? " / 맵기: " + spicy : "");
+    // 3. 필터링된 결과 화면에 꽂아주기
+    const listDiv = document.getElementById('list');
+    const selectedList = recipes[userChoice] || [];
 
-    let scoredFoods = foods.map(food => {
-      let score = 0;
-
-      if (food.type === type) score += 4;
-      if (food.situation === situation) score += 3;
-      if (food.health === health) score += 2;
-      if (food.method === method) score += 2;
-
-      const ingredientList = ingredients.split(",");
-      ingredientList.forEach(item => {
-        const clean = item.trim();
-        if (clean !== "" && food.name.includes(clean)) {
-          score += 3;
-        }
-      });
-
-      return {
-        ...food,
-        score: score
-      };
-    });
-
-    scoredFoods.sort((a, b) => b.score - a.score);
-
-    let resultFoods = scoredFoods.filter(food => food.score > 0).slice(0, 6);
-
-    if (resultFoods.length < 3) {
-      resultFoods = scoredFoods.slice(0, 6);
+    if (selectedList.length === 0) {
+        listDiv.innerHTML = '<div style="text-align:center; padding:40px; color:#999;">준비된 레시피가 없습니다.</div>';
+    } else {
+        selectedList.forEach(item => {
+            listDiv.innerHTML += `
+                <div class="recipe-card">
+                    <div class="bookmark">🔖</div>
+                    <div class="img-placeholder">음식 사진</div>
+                    <div class="recipe-info">
+                        <h3 class="recipe-title">${item.name} <span class="stars">${item.star}</span></h3>
+                        <p class="recipe-details"><strong>필요 재료 :</strong> ${item.ing}</p>
+                        <p class="recipe-details"><strong>기본 조리법 :</strong> ${item.method}</p>
+                        <p class="recipe-details" style="color:#888; font-size:11px;">(내가 가진 재료 <strong>"${userIng}"</strong> 활용 가능!)</p>
+                        <div class="btn-group">
+                            <button class="btn">조리 시작</button>
+                            <button class="btn btn-end">조리 종료</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
     }
+</script>
 
-    const cards = document.getElementById("cards");
-
-    resultFoods.forEach(food => {
-      const card = document.createElement("div");
-      card.className = "card";
-
-      card.innerHTML = `
-        <div class="food-img">${food.emoji}</div>
-        <h3>${food.name}</h3>
-        <p>${food.desc}</p>
-        <p><strong>종류:</strong> ${food.type}</p>
-        <p><strong>추천 상황:</strong> ${food.situation}</p>
-        <span class="tag">${food.method}</span>
-      `;
-
-      cards.appendChild(card);
-    });
-  </script>
 </body>
 </html>
