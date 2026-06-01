@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>냉키트 - 상세조리법</title>
+    <style>
+        body { font-family: sans-serif; background: #f5f5f5; display: flex; justify-content: center; margin: 0; }
+        .wrapper { width: 100%; max-width: 480px; background: #fff; min-height: 100vh; border: 1px solid #ddd; display: flex; flex-direction: column; padding: 15px; box-sizing: border-box; }
+        header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 15px; }
+        .menu-icon, .home-icon { font-size: 24px; cursor: pointer; }
+        .main-title-container { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .recipe-title { font-size: 26px; font-weight: bold; margin: 0; }
+        .icon-actions { display: flex; gap: 8px; }
+        .action-btn { width: 35px; height: 35px; border-radius: 50%; border: 1px solid red; display: flex; align-items: center; justify-content: center; font-size: 16px; cursor: pointer; background: #fff5f5; color: red; font-weight: bold; }
+        .meta-info { font-size: 15px; line-height: 1.8; margin-bottom: 20px; font-weight: bold; }
+        .timer-box { display: flex; align-items: center; gap: 8px; background: #fafafa; padding: 10px; border: 1px solid #ddd; width: fit-content; margin-bottom: 25px; }
+        .t-btn { padding: 6px 12px; font-size: 12px; font-weight: bold; border: 1px solid #333; background: #ffe4e1; cursor: pointer; }
+        .time-display { font-size: 16px; font-weight: bold; font-family: monospace; min-width: 45px; text-align: center; }
+        .step-container { margin-bottom: 25px; }
+        .step-title { font-size: 16px; font-weight: bold; margin-bottom: 10px; }
+        .step-content { display: flex; gap: 15px; }
+        .step-img { width: 110px; height: 90px; border: 1px solid #333; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px; background: #fff; flex-shrink: 0; }
+        .step-text-wrapper { flex: 1; font-size: 13px; line-height: 1.5; color: #333; }
+        .handwritten-tip { font-size: 11px; color: #e91e63; font-style: italic; margin-top: 5px; font-weight: bold; }
+        .highlight-marker { background: linear-gradient(180deg, rgba(255,255,255,0) 60%, #fff59d 40%); }
+        .back-btn { margin-top: auto; padding: 12px; background: #333; color: #fff; border: none; font-weight: bold; cursor: pointer; border-radius: 4px; text-align: center; }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <header>
+        <div class="menu-icon">☰</div>
+        <div style="font-size: 20px; font-weight: bold; color: #ffcc00; text-shadow: 1px 1px 1px #000;">냉키트 😋</div>
+        <div class="home-icon" onclick="location.href='survey.html'">🏠</div>
+    </header>
+
+    <div class="main-title-container">
+        <h1 class="recipe-title" id="foodName">조리 요리</h1>
+        <div class="icon-actions">
+            <button class="action-btn" onclick="alert('✏️ 노트 쓰기창 열기')">✏️</button>
+            <button class="action-btn" onclick="alert('🔖 북마크에 추가됨!')">🔖</button>
+        </div>
+    </div>
+
+    <div class="meta-info">
+        <div>난이도 : <span id="difficulty" style="color: #fbc02d;">★</span></div>
+        <div>재료 : <span id="ingList" style="font-weight: normal; color: #555;">재료 정보</span></div>
+        <div>예상 소요 시간 : <span style="font-weight: normal; color: #555;">20 ~ 30분</span></div>
+    </div>
+
+    <div class="timer-box">
+        <button class="t-btn" id="startBtn" onclick="toggleTimer()">조리 시작</button>
+        <div class="time-display" id="timerStr">00:00</div>
+        <button class="t-btn" style="background:#fff;" onclick="resetTimer()">조리 종료</button>
+    </div>
+
+    <div class="step-container">
+        <div class="step-title">STEP 1.</div>
+        <div class="step-content">
+            <div class="step-img">사진</div>
+            <div class="step-text-wrapper">
+                <span class="highlight-marker">재료를 흐르는 물에 깨끗이 씻은 후 알맞은 크기로 정갈하게 다듬어 줍니다.</span> 육수 재료가 있다면 먼저 냄비에 우려내세요.
+                <div class="handwritten-tip">育 이렇게 하는 게 맛이 훨씬 깊어짐!</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="step-container">
+        <div class="step-title">STEP 2.</div>
+        <div class="step-content">
+            <div class="step-img">사진</div>
+            <div class="step-text-wrapper">
+                준비된 양념장을 골고루 풀어 넣은 뒤, 양념이 깊게 밸 때까지 중간 불에서 자작하게 조려내며 끓여줍니다. <span class="highlight-marker">눌어붙지 않게 주걱으로 저어주세요
