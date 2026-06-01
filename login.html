@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>냉키트 - 로그인</title>
+    <style>
+        body { font-family: sans-serif; background: #fff; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .phone-wrapper { width: 100%; max-width: 480px; min-height: 95vh; border: 2px dashed #999; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; position: relative; }
+        .login-title { font-size: 64px; font-weight: 900; letter-spacing: -2px; margin-bottom: 40px; font-family: sans-serif; }
+        .input-group { width: 85%; margin-bottom: 15px; }
+        input { width: 100%; padding: 15px; border: 2px solid #333; font-size: 16px; box-sizing: border-box; font-family: inherit; }
+        .arrow-btn { width: 60px; height: 40px; background: #e0e0e0; border: none; border-radius: 10px; font-size: 20px; cursor: pointer; margin-top: 20px; display: flex; align-items: center; justify-content: center; }
+        .footer-links { margin-top: 50px; font-size: 12px; color: #666; text-align: center; }
+        .footer-links p { margin-bottom: 15px; }
+        .footer-links span { text-decoration: underline; cursor: pointer; margin: 0 10px; }
+    </style>
+</head>
+<body>
+
+<div class="phone-wrapper">
+    <div class="login-title">LOGIN</div>
+    
+    <div class="input-group">
+        <input type="text" id="username" placeholder="아이디">
+    </div>
+    <div class="input-group">
+        <input type="password" placeholder="비밀번호">
+    </div>
+
+    <button class="arrow-btn" onclick="login()">➔</button>
+
+    <div class="footer-links">
+        <p>아이디/비밀번호를 잊으셨나요?</p>
+        <div>
+            <span>회원가입</span> OR <span onclick="location.href='index.html'">건너뛰기</span>
+        </div>
+    </div>
+</div>
+
+<script>
+    function login() {
+        const user = document.getElementById('username').value.trim() || "게스트";
+        localStorage.setItem('nkUser', user);
+        location.href = 'index.html';
+    }
+</script>
+
+</body>
+</html>
