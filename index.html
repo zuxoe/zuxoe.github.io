@@ -3,47 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>냉키트 - 설문 입력</title>
+    <title>냉키트 - 로그인</title>
     <style>
-        body { font-family: sans-serif; background: #f5f5f5; display: flex; justify-content: center; margin: 0; }
-        .wrapper { width: 100%; max-width: 480px; background: #fff; min-height: 100vh; border: 1px solid #ddd; display: flex; flex-direction: column; }
+        body { font-family: sans-serif; background: #fff; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .phone-wrapper { width: 100%; max-width: 480px; min-height: 95vh; border: 2px dashed #999; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; position: relative; }
         
-        /* 상단 헤더 */
-        header { padding: 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; }
-        .menu-icon, .home-icon { font-size: 24px; cursor: pointer; }
-        .logo { font-size: 24px; font-weight: bold; color: #ffcc00; text-shadow: 1px 1px 1px #000; cursor: pointer; }
-
-        .container { padding: 20px; flex: 1; }
-        h2 { font-size: 18px; margin-top: 0; margin-bottom: 15px; color: #111; }
+        /* 손그림 특유의 대문자 크고 볼드한 타이틀 */
+        .login-title { font-size: 64px; font-weight: 900; letter-spacing: -2px; margin-bottom: 40px; }
         
-        /* 설문 섹션 및 점선 분리선 */
-        section { margin-bottom: 25px; }
-        .divider { border: 0; border-top: 1px dotted #aaa; margin: 25px 0; }
+        .input-group { width: 85%; margin-bottom: 15px; }
+        input { width: 100%; padding: 15px; border: 2px solid #333; font-size: 16px; box-sizing: border-box; font-family: inherit; }
+        
+        /* 그림에 있던 미니멀한 우측 화살표 버튼 */
+        .arrow-btn { width: 60px; height: 40px; background: #e0e0e0; border: 2px solid #333; border-radius: 10px; font-size: 20px; cursor: pointer; margin-top: 20px; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+        .arrow-btn:hover { background: #ccc; }
 
-        /* 라디오 버튼 그룹 레이아웃 (손그림 매칭) */
-        .filter-group { display: flex; flex-direction: column; gap: 12px; margin-bottom: 10px; }
-        .filter-row { display: flex; align-items: flex-start; line-height: 1.4; }
-        .filter-label { width: 85px; font-weight: bold; color: #000; font-size: 14px; flex-shrink: 0; }
-        .filter-options { display: flex; flex-wrap: wrap; gap: 8px; flex: 1; }
-        .filter-options label { font-size: 13px; font-weight: normal; cursor: pointer; display: flex; align-items: center; gap: 3px; margin-right: 4px; }
-
-        /* 입력창 스타일 */
-        .input-title { font-size: 14px; font-weight: bold; margin-bottom: 8px; color: #333; }
-        input[type="text"] { width: 100%; padding: 12px; box-sizing: border-box; border: 2px solid #333; border-radius: 4px; font-size: 14px; }
-        .sub-desc { font-size: 11px; color: #888; margin-top: 5px; }
-
-        .taste-block { margin-bottom: 15px; }
-
-        /* 하단 네비게이션 바 */
-        footer { padding: 15px 20px; display: flex; justify-content: space-between; border-top: 1px solid #eee; background: #fff; margin-top: auto; }
-        .nav-btn { padding: 10px 22px; border: 1px solid #ccc; background: #fff; cursor: pointer; border-radius: 20px; font-weight: bold; font-size: 14px; }
-        .next-btn { background: #ffe4e1; border: 1px solid #ffb6c1; }
+        /* 맨 밑 하단 텍스트 및 링크 레이아웃 */
+        .footer-links { margin-top: 60px; font-size: 13px; color: #444; text-align: center; line-height: 1.6; }
+        .find-text { color: #666; cursor: pointer; text-decoration: underline; margin-bottom: 8px; font-weight: bold; }
+        .find-text:hover { color: #000; }
+        .or-text { font-size: 12px; color: #999; margin: 10px 0; }
+        
+        .action-links span { text-decoration: underline; cursor: pointer; margin: 0 10px; font-weight: bold; font-size: 14px; }
+        .action-links span:hover { color: #ffcc00; }
     </style>
 </head>
 <body>
 
-<div class="wrapper">
-    <header>
-        <div class="menu-icon">☰</div>
-        <div class="logo" onclick="location.href='login.html'">냉키트 😋</div>
-        <div class="home-icon" onclick="location.href='login.html'">🏠</div>
+<div class="phone-wrapper">
+    <div class="login-title">LOGIN</div>
+    
+    <div class="input-group">
+        <input type="text" id="username" placeholder="아이디">
+    </div>
+    <div class="input-group">
+        <input type="password" id="password" placeholder="비밀번호">
+    </div>
+
+    <button class="arrow-btn" onclick="login()">➔</button>
+
+    <div class="footer-links">
+        <div class="find-text" onclick="findInfo()">아이디/비밀번호를 잊으셨나요?</div>
+        <div class="or-text">──────── OR ────────</div>
+        <div class="action-links">
+            <span onclick="signUp()">회원가입</span>
+            <span onclick="skipLogin()">건너뛰기</span>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 1. 로그인 함수 (화살표 클릭 시)
+    function login() {
+        const user = document.getElementById('username').value.trim();
+        const pw = document.getElementById('password').value.trim();
+
+        if (user === "" || pw === "") {
+            alert("아이디와 비밀번호를 입력해주세요!");
+            return;
